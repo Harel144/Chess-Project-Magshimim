@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-12-13T17:59:36.695Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="jz4xLqZmKlYOrKBKSqO9" version="20.6.2" type="gitlab">
+<mxfile host="app.diagrams.net" modified="2022-12-13T18:02:42.068Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="cDVOM9xKFfKkalZ6iY2r" version="20.6.2" type="gitlab">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1422" dy="2001" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -146,20 +146,26 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="xySBzU9We3JzJbdnWGr_-37" value="Board" style="swimlane;fontSize=16;startSize=23;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="1111" y="-1100" width="260" height="410" as="geometry" />
+        <mxCell id="xySBzU9We3JzJbdnWGr_-37" value="Side" style="swimlane;fontSize=16;startSize=23;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1111" y="-1100" width="260" height="440" as="geometry" />
         </mxCell>
-        <mxCell id="xySBzU9We3JzJbdnWGr_-38" value="+ Board()&lt;br&gt;+ addKnight(Knight newKnight)&lt;br&gt;+ addBishop(Bishop newBishop)&lt;br&gt;+ addQueen(Queen newQueen)&lt;br&gt;+ addRook(Rook newRook)&lt;br&gt;+ removeKnight(string position)&lt;br&gt;+ removeQueen(string position)&lt;br&gt;+ removeBishop(string position)&lt;br&gt;+ removeRook(string position)&lt;br&gt;+ removePawn(string position)&lt;br&gt;+ getBoardString()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;labelBorderColor=none;" vertex="1" parent="xySBzU9We3JzJbdnWGr_-37">
-          <mxGeometry x="-2" y="20" width="262" height="220" as="geometry" />
+        <mxCell id="xySBzU9We3JzJbdnWGr_-38" value="+ Side()&lt;br&gt;+ addKnight(Knight newKnight)&lt;br&gt;+ addBishop(Bishop newBishop)&lt;br&gt;+ addQueen(Queen newQueen)&lt;br&gt;+ addRook(Rook newRook)&lt;br&gt;+ removeKnight(string position)&lt;br&gt;+ removeQueen(string position)&lt;br&gt;+ removeBishop(string position)&lt;br&gt;+ removeRook(string position)&lt;br&gt;+ removePawn(string position)&lt;br&gt;+ getBoardString()&lt;br&gt;+ isItSideTurn()&lt;br&gt;+ changeTurnState()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;labelBorderColor=none;" vertex="1" parent="xySBzU9We3JzJbdnWGr_-37">
+          <mxGeometry x="-2" y="20" width="262" height="270" as="geometry" />
         </mxCell>
         <mxCell id="xySBzU9We3JzJbdnWGr_-39" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;" edge="1" parent="xySBzU9We3JzJbdnWGr_-37">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint y="240" as="sourcePoint" />
-            <mxPoint x="260" y="240" as="targetPoint" />
+            <mxPoint x="-2" y="280" as="sourcePoint" />
+            <mxPoint x="258" y="280" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="xySBzU9We3JzJbdnWGr_-40" value="- Knights: vector&amp;lt;Knight&amp;gt;&lt;br&gt;- Bishops: vector&amp;lt;Bishop&amp;gt;&lt;br&gt;- Knights: vector&amp;lt;Knight&amp;gt;&lt;br&gt;- Rooks: vector &amp;lt;Rook&amp;gt;&lt;br&gt;- kingPiece: King&lt;br&gt;- Queens: vector &amp;lt;Queen&amp;gt;&lt;br&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;labelBorderColor=none;fontSize=16;" vertex="1" parent="xySBzU9We3JzJbdnWGr_-37">
-          <mxGeometry x="-1" y="270" width="240" height="140" as="geometry" />
+        <mxCell id="xySBzU9We3JzJbdnWGr_-40" value="- Knights: vector&amp;lt;Knight&amp;gt;&lt;br&gt;- Bishops: vector&amp;lt;Bishop&amp;gt;&lt;br&gt;- Knights: vector&amp;lt;Knight&amp;gt;&lt;br&gt;- Rooks: vector &amp;lt;Rook&amp;gt;&lt;br&gt;- kingPiece: King&lt;br&gt;- Queens: vector &amp;lt;Queen&amp;gt;&lt;br&gt;- thisSideTurn: bool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;labelBorderColor=none;fontSize=16;" vertex="1" parent="xySBzU9We3JzJbdnWGr_-37">
+          <mxGeometry y="300" width="240" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="xySBzU9We3JzJbdnWGr_-43" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;" edge="1" parent="xySBzU9We3JzJbdnWGr_-37">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-1" y="300" as="sourcePoint" />
+            <mxPoint x="259" y="300" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
