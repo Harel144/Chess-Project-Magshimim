@@ -1,6 +1,16 @@
 #pragma once
 #include <string>
 
+#define LEGALMOVE 0
+#define LEGALMOVECHECK 1
+#define ILLEGALMOVENOORIGINALPIECE 2
+#define ILLEGALMOVETHEREISALLY 3
+#define ILLEGALMOVESELFCHECK 4
+#define ILLEGALMOVEILLEGALPOSITION 5
+#define ILLEGALMOVEILLEGALMOVEMENTOFPIECE 6
+#define ILLEGALMOVENOMOVE 7
+#define LEGALMOVEMATE 8
+
 using std::string;
 
 class Piece
@@ -17,7 +27,7 @@ public:
 	string getType() const;
 
 	//other methods
-	virtual int move(const string newPosition) = 0;
+	virtual string move(const string newPosition) = 0;
 	virtual bool isLegitMove(const string position) = 0;
 	
 private:
@@ -26,6 +36,8 @@ private:
 	string type;
 	string position;
 
+protected: 
 	//methods
 	void setPosition(const string newPosition);
+
 };
