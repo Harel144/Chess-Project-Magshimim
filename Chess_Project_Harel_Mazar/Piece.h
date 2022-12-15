@@ -7,18 +7,18 @@ class Piece
 {
 public:
 	//c'tor
-	Piece(string name, string type, string position);
+	Piece(const string name, const string type, const string position);
 	
 	//setters and getters
-	void setName(string name);
-	void setType(string type);
-	string getName();
-	string getPosition();
-	string getType();
+	void setName(const string name);
+	void setType(const string type);
+	string getName() const;
+	string getPosition() const;
+	string getType() const;
 
 	//other methods
-	virtual int move(string newPosition) = 0;
-	virtual bool isLegitMove(string position) = 0;
+	virtual int move(const string newPosition) = 0;
+	virtual bool isLegitMove(const string position) = 0;
 	
 private:
 	//fields
@@ -27,5 +27,5 @@ private:
 	string position;
 
 	//methods
-	void setPosition(string newPosition);
+	void setPosition(const string newPosition);
 };
