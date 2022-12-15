@@ -11,7 +11,6 @@ public:
 	
 	//setters and getters
 	void setName(string name);
-	void setPosition(string newPosition);
 	void setType(string type);
 	string getName();
 	string getPosition();
@@ -26,4 +25,7 @@ private:
 	string name;
 	string type;
 	string position;
+
+	//methods
+	void setPosition(string newPosition);
 };
