@@ -127,6 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bishop.h" />
+    <ClInclude Include="Board.h" />
     <ClInclude Include="Piece.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="Rook.h" />
@@ -134,6 +136,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="Rook.cpp" />
     <ClCompile Include="Source.cpp" />
