@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
-
-using std::string;
+#include "Side.h"
 
 class Board
 {
