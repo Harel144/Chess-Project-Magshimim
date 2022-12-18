@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-12-18T19:23:13.930Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="3J5EggaQt_PpBH18GWxQ" version="20.7.4" type="gitlab">
+<mxfile host="app.diagrams.net" modified="2022-12-18T19:42:53.019Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="cdLdy85IiA-DJWYIsGA8" version="20.7.4" type="gitlab">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1434" dy="2003" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -147,24 +147,24 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="xySBzU9We3JzJbdnWGr_-37" value="Side" style="swimlane;fontSize=16;startSize=23;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1200" y="-1090" width="260" height="510" as="geometry" />
+          <mxGeometry x="1260" y="-1090" width="260" height="250" as="geometry" />
         </mxCell>
-        <mxCell id="xySBzU9We3JzJbdnWGr_-38" value="+ Side()&lt;br&gt;+ addKnight(Knight newKnight)&lt;br&gt;+ addBishop(Bishop newBishop)&lt;br&gt;+ addQueen(Queen newQueen)&lt;br&gt;+ addRook(Rook newRook)&lt;br&gt;+ removeKnight(string position)&lt;br&gt;+ removeQueen(string position)&lt;br&gt;+ removeBishop(string position)&lt;br&gt;+ removeRook(string position)&lt;br&gt;+ removePawn(string position)&lt;br&gt;+ getBoardString()&lt;br&gt;+ isItSideTurn()&lt;br&gt;+ changeTurnState()&lt;br&gt;+ getSideString()&lt;br&gt;+ isThisMoveIllegal(Piece pieceToCheck, string position)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;labelBorderColor=none;" parent="xySBzU9We3JzJbdnWGr_-37" vertex="1">
-          <mxGeometry x="-2" y="20" width="262" height="320" as="geometry" />
+        <mxCell id="xySBzU9We3JzJbdnWGr_-38" value="+ Side()&lt;br&gt;+ addPiece(Piece* newKnight)&lt;br&gt;+ removePiece(string position)&lt;br&gt;+ isItSideTurn()&lt;br&gt;+ changeTurnState()&lt;br&gt;+ getSideString()&lt;br&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;labelBorderColor=none;" parent="xySBzU9We3JzJbdnWGr_-37" vertex="1">
+          <mxGeometry x="-2" y="20" width="262" height="140" as="geometry" />
         </mxCell>
         <mxCell id="xySBzU9We3JzJbdnWGr_-39" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;" parent="xySBzU9We3JzJbdnWGr_-37" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-2" y="340" as="sourcePoint" />
-            <mxPoint x="258" y="340" as="targetPoint" />
+            <mxPoint y="160" as="sourcePoint" />
+            <mxPoint x="260" y="160" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="xySBzU9We3JzJbdnWGr_-40" value="- Knights: vector&amp;lt;Knight&amp;gt;&lt;br&gt;- Bishops: vector&amp;lt;Bishop&amp;gt;&lt;br&gt;- Knights: vector&amp;lt;Knight&amp;gt;&lt;br&gt;- Rooks: vector &amp;lt;Rook&amp;gt;&lt;br&gt;- kingPiece: King&lt;br&gt;- Queens: vector &amp;lt;Queen&amp;gt;&lt;br&gt;- thisSideTurn: bool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;labelBorderColor=none;fontSize=16;" parent="xySBzU9We3JzJbdnWGr_-37" vertex="1">
-          <mxGeometry x="-2" y="366" width="240" height="140" as="geometry" />
+        <mxCell id="xySBzU9We3JzJbdnWGr_-40" value="- Pieces: vector&amp;lt;Piece*&amp;gt;&lt;br&gt;- thisSideTurn: bool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;labelBorderColor=none;fontSize=16;" parent="xySBzU9We3JzJbdnWGr_-37" vertex="1">
+          <mxGeometry x="-2" y="185" width="240" height="140" as="geometry" />
         </mxCell>
         <mxCell id="xySBzU9We3JzJbdnWGr_-43" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;" parent="xySBzU9We3JzJbdnWGr_-37" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-2" y="366" as="sourcePoint" />
-            <mxPoint x="258" y="366" as="targetPoint" />
+            <mxPoint y="190" as="sourcePoint" />
+            <mxPoint x="260" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="xySBzU9We3JzJbdnWGr_-44" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=-0.004;entryY=0.97;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;fontSize=16;startArrow=none;startFill=0;endArrow=diamondThin;endFill=0;endSize=20;elbow=vertical;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="xySBzU9We3JzJbdnWGr_-32" target="xySBzU9We3JzJbdnWGr_-38" edge="1">
@@ -183,6 +183,7 @@
             <Array as="points">
               <mxPoint x="1150" y="-280" />
               <mxPoint x="1150" y="-637" />
+              <mxPoint x="1255" y="-637" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -205,29 +206,31 @@
             <Array as="points">
               <mxPoint x="230" y="-1060" />
               <mxPoint x="1170" y="-1060" />
-              <mxPoint x="1170" y="-1000" />
+              <mxPoint x="1170" y="-1040" />
+              <mxPoint x="1220" y="-1040" />
+              <mxPoint x="1220" y="-1060" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="xySBzU9We3JzJbdnWGr_-50" value="Board" style="swimlane;fontSize=16;startSize=23;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1571" y="-940" width="262" height="340" as="geometry" />
+          <mxGeometry x="1670" y="-1090" width="262" height="410" as="geometry" />
         </mxCell>
-        <mxCell id="xySBzU9We3JzJbdnWGr_-51" value="+ Board()&lt;br&gt;+ isBlackTurn()&lt;br&gt;+ isWhiteTurn()&lt;br&gt;+ getBoardString()&lt;br&gt;+ printBoard()&lt;br&gt;+ eatPiece(string position)&lt;br&gt;+ isSquareTaken(string position)&lt;br&gt;+ getBlackSide()&lt;br&gt;+ getWhiteSide()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;labelBorderColor=none;" parent="xySBzU9We3JzJbdnWGr_-50" vertex="1">
-          <mxGeometry x="-1" y="20" width="262" height="250" as="geometry" />
+        <mxCell id="xySBzU9We3JzJbdnWGr_-51" value="+ Board()&lt;br&gt;+ isBlackTurn()&lt;br&gt;+ isWhiteTurn()&lt;br&gt;+ getBoardString()&lt;br&gt;+ printBoard()&lt;br&gt;+ eatPiece(string position)&lt;br&gt;+ isSquareTaken(string position)&lt;br&gt;+ getBlackSide()&lt;br&gt;+ getWhiteSide()&lt;br&gt;+ isThisMoveIllegal(Piece pieceToCheck, string position)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;labelBorderColor=none;" parent="xySBzU9We3JzJbdnWGr_-50" vertex="1">
+          <mxGeometry x="-1" y="20" width="262" height="270" as="geometry" />
         </mxCell>
         <mxCell id="xySBzU9We3JzJbdnWGr_-53" value="- blackSide: Side&lt;br&gt;- whiteSide: Side&lt;br&gt;- board: string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;labelBorderColor=none;fontSize=16;" parent="xySBzU9We3JzJbdnWGr_-50" vertex="1">
-          <mxGeometry x="-1" y="270" width="240" height="140" as="geometry" />
+          <mxGeometry y="320" width="240" height="140" as="geometry" />
         </mxCell>
         <mxCell id="xySBzU9We3JzJbdnWGr_-54" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;" parent="xySBzU9We3JzJbdnWGr_-50" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-4" y="230" as="sourcePoint" />
-            <mxPoint x="266" y="230" as="targetPoint" />
+            <mxPoint x="-1" y="290" as="sourcePoint" />
+            <mxPoint x="269" y="290" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="xySBzU9We3JzJbdnWGr_-55" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;exitX=0.004;exitY=0.279;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.997;entryY=0.274;entryDx=0;entryDy=0;entryPerimeter=0;" parent="xySBzU9We3JzJbdnWGr_-50" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-1.0020000000003346" y="261.2499999999998" as="sourcePoint" />
-            <mxPoint x="259.16399999999936" y="259.9999999999998" as="targetPoint" />
+            <mxPoint x="-1.0020000000003346" y="319.9999999999998" as="sourcePoint" />
+            <mxPoint x="259.16399999999936" y="318.7499999999998" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="xySBzU9We3JzJbdnWGr_-56" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1.013;exitY=0.75;exitDx=0;exitDy=0;entryX=-0.011;entryY=0.406;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;fontSize=16;startArrow=none;startFill=0;endArrow=diamondThin;endFill=0;endSize=20;elbow=vertical;exitPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="xySBzU9We3JzJbdnWGr_-38" target="xySBzU9We3JzJbdnWGr_-51" edge="1">
