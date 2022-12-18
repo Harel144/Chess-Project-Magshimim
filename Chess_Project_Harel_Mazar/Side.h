@@ -10,16 +10,16 @@ class Side
 
 public:
 	Side();
-	void addPiece(const Piece* newPiece);
+	void addPiece(const Piece& newPiece);
 	void removePiece(const string position);
 
-	vector<Piece*> getPiecesVector() const;
+	vector<Piece> getPiecesVector() const;
 
 	void changeTurnState();
 	bool isItSideTurn() const;
 
 private:
-	vector<Piece*> Pieces;
+	vector<Piece> Pieces;
 	bool thisSideTurn;
 
 };
