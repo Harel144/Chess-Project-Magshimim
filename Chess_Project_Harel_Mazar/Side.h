@@ -13,10 +13,10 @@ public:
 	void addPiece(const Piece* newPiece);
 	void removePiece(const string position);
 
-	vector<Piece*> getPiecesVector();
+	vector<Piece*> getPiecesVector() const;
 
 	void changeTurnState();
-	bool isItSideTurn();
+	bool isItSideTurn() const;
 
 private:
 	vector<Piece*> Pieces;
