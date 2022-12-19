@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Side.h"
+#include <iostream>
 
 class Board
 {

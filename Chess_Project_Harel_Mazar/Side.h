@@ -17,7 +17,9 @@ public:
 
 	void changeTurnState();
 	bool isItSideTurn() const;
+	bool isOneOfMyPiecesAtXLocation(const string location) const;
 
+	Side operator=(Side& otherSide);
 private:
 	vector<Piece> Pieces;
 	bool thisSideTurn;

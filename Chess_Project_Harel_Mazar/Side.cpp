@@ -35,3 +35,21 @@ bool Side::isItSideTurn() const
 {
 	return this->thisSideTurn;
 }
+
+bool Side::isOneOfMyPiecesAtXLocation(const string location) const
+{
+	for (int i = 0; i < this->Pieces.size(); i++)
+	{
+		if (this->Pieces[i].getPosition() == location)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+Side Side::operator=(Side& otherSide)
+{
+	this->Pieces = otherSide.getPiecesVector();
+	this->thisSideTurn = otherSide.isItSideTurn();
+}
