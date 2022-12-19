@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-12-18T19:56:59.085Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="joRgk9EYd-YlJ0cTxktn" version="20.7.4" type="gitlab">
+<mxfile host="app.diagrams.net" modified="2022-12-19T00:15:10.119Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="HUn0lwdntruA1off27sg" version="20.7.4" type="gitlab">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="2049" dy="2360" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="2003" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -213,24 +213,24 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="xySBzU9We3JzJbdnWGr_-50" value="Board" style="swimlane;fontSize=16;startSize=23;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1670" y="-1090" width="262" height="410" as="geometry" />
+          <mxGeometry x="1670" y="-1090" width="280" height="410" as="geometry" />
         </mxCell>
-        <mxCell id="xySBzU9We3JzJbdnWGr_-51" value="+ Board()&lt;br&gt;+ isBlackTurn()&lt;br&gt;+ isWhiteTurn()&lt;br&gt;+ getBoardString()&lt;br&gt;+ printBoard()&lt;br&gt;+ eatPiece(string position)&lt;br&gt;+ isSquareTaken(string position)&lt;br&gt;+ getBlackSide()&lt;br&gt;+ getWhiteSide()&lt;br&gt;+ isThisMoveIllegal(Piece pieceToCheck, string position)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;labelBorderColor=none;" parent="xySBzU9We3JzJbdnWGr_-50" vertex="1">
-          <mxGeometry x="-1" y="20" width="262" height="270" as="geometry" />
+        <mxCell id="xySBzU9We3JzJbdnWGr_-51" value="+ Board()&lt;br&gt;+ isBlackTurn()&lt;br&gt;+ isWhiteTurn()&lt;br&gt;+ getBoardString()&lt;br&gt;+ printBoard()&lt;br&gt;+ eatPiece(string position)&lt;br&gt;+ isSquareTaken(string position)&lt;br&gt;+ getBlackSide()&lt;br&gt;+ getWhiteSide()&lt;br&gt;+ isThisMoveIllegal(Piece pieceToCheck, string position)&lt;br&gt;+ setBlackSide(Side &amp;amp;newBlackSide)&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ setWhiteSide(Side &amp;amp;newWhiteSide)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;labelBorderColor=none;" parent="xySBzU9We3JzJbdnWGr_-50" vertex="1">
+          <mxGeometry x="-1" y="20" width="281" height="270" as="geometry" />
         </mxCell>
         <mxCell id="xySBzU9We3JzJbdnWGr_-53" value="- blackSide: Side&lt;br&gt;- whiteSide: Side&lt;br&gt;- board: string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;labelBorderColor=none;fontSize=16;" parent="xySBzU9We3JzJbdnWGr_-50" vertex="1">
           <mxGeometry y="320" width="240" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="xySBzU9We3JzJbdnWGr_-54" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;" parent="xySBzU9We3JzJbdnWGr_-50" edge="1">
+        <mxCell id="xySBzU9We3JzJbdnWGr_-54" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;entryX=1;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" parent="xySBzU9We3JzJbdnWGr_-50" edge="1" target="xySBzU9We3JzJbdnWGr_-51">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-1" y="290" as="sourcePoint" />
             <mxPoint x="269" y="290" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="xySBzU9We3JzJbdnWGr_-55" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;exitX=0.004;exitY=0.279;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.997;entryY=0.274;entryDx=0;entryDy=0;entryPerimeter=0;" parent="xySBzU9We3JzJbdnWGr_-50" edge="1">
+        <mxCell id="xySBzU9We3JzJbdnWGr_-55" value="" style="endArrow=none;html=1;rounded=0;fontSize=16;exitX=0.004;exitY=0.279;exitDx=0;exitDy=0;exitPerimeter=0;" parent="xySBzU9We3JzJbdnWGr_-50" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-1.0020000000003346" y="319.9999999999998" as="sourcePoint" />
-            <mxPoint x="259.16399999999936" y="318.7499999999998" as="targetPoint" />
+            <mxPoint x="280" y="319" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="xySBzU9We3JzJbdnWGr_-56" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1.013;exitY=0.75;exitDx=0;exitDy=0;entryX=-0.011;entryY=0.406;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;fontSize=16;startArrow=none;startFill=0;endArrow=diamondThin;endFill=0;endSize=20;elbow=vertical;exitPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="xySBzU9We3JzJbdnWGr_-38" target="xySBzU9We3JzJbdnWGr_-51" edge="1">
