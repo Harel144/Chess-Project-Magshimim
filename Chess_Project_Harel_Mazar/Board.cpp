@@ -126,6 +126,11 @@ void Board::updateBoardString()
 			newBoardStr[i] = this->whiteSide.getPieceAtLocationX(currPos)->getName()[0];
 		}
 	}
+	
+	setBoardString(newBoardStr);
+}
 
-	this->board = newBoardStr;
+void Board::setBoardString(const string newBoard)
+{
+	this->board = newBoard;
 }
