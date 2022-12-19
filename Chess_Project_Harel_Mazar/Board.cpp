@@ -6,22 +6,25 @@ Board::Board()
 	this->whiteSide = *(new Side());
 	this->board = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1";
 
+	this->blackSide.changeTurnState();
+
+
 	/*
 	adding rooks
 	*/
 
 	//black rooks
-	Rook* rook = new Rook("r", "Rook", "a8");
-	this->blackSide.addPiece(rook);
-	rook->setPosition("h8");
-	this->blackSide.addPiece(rook);
-
+	Rook* rookBlackOne = new Rook("r", "Rook", "a8");
+	Rook* rookBlackTwo = new Rook("r", "Rook", "h8");
 	//white rooks
-	rook->setName("R");
-	rook->setPosition("a1");
-	this->whiteSide.addPiece(rook);
-	rook->setPosition("h1");
-	this->whiteSide.addPiece(rook);
+	Rook* rookWhiteOne = new Rook("R", "Rook", "a1");
+	Rook* rookWhiteTwo = new Rook("R", "Rook", "h1");
+
+	this->blackSide.addPiece(rookBlackOne);
+	this->blackSide.addPiece(rookBlackTwo);
+
+	this->whiteSide.addPiece(rookWhiteOne);
+	this->whiteSide.addPiece(rookWhiteTwo);
 }
 
 bool Board::isWhiteTurn() const
@@ -43,26 +46,33 @@ void Board::printBoard() const
 {
 	for (int i = 0; i < 64; i++)
 	{
-		std::cout << this->getBoardString()[i] + " ";
-
-		if (i % 8 == 0)
+		if (i % 8 == 0 && i != 0)
 		{
 			std::cout << std::endl;
 		}
+
+		std::cout << getBoardString()[i] << " ";
 	}
+
+	std::cout << std::endl;
 }
 
 
 void Board::eatPiece(const string position)
 {
-	if (this->blackSide.isOneOfMyPiecesAtXLocation(position))
+	if (isWhiteTurn())
 	{
-		this->blackSide.removePiece(position);
+		if (this->blackSide.isOneOfMyPiecesAtXLocation(position))
+		{
+			this->blackSide.removePiece(position);
+		}
 	}
-
-	if (this->whiteSide.isOneOfMyPiecesAtXLocation(position))
+	else
 	{
-		this->whiteSide.removePiece(position);
+		if (this->whiteSide.isOneOfMyPiecesAtXLocation(position))
+		{
+			this->whiteSide.removePiece(position);
+		}
 	}
 }
 
@@ -93,22 +103,41 @@ void Board::setBlackSide(Side& newBlackSide)
 
 string Board::movePieceAtBoard(const string source, const string destination)
 {
+	string retString;
 	if (isWhiteTurn())
 	{
-		if (blackSide.isOneOfMyPiecesAtXLocation(destination))
+		if (blackSide.isOneOfMyPiecesAtXLocation(source))
+		{
+			return to_string(ILLEGALMOVENOORIGINALPIECE);
+		}
+
+		retString =  whiteSide.movePiece(source, destination);
+
+		if (blackSide.isOneOfMyPiecesAtXLocation(destination) && retString == "0")
 		{
 			eatPiece(destination);
 		}
-		whiteSide.movePiece(source, destination);
 	}
 	else
 	{
-		if (whiteSide.isOneOfMyPiecesAtXLocation(destination))
+		if (whiteSide.isOneOfMyPiecesAtXLocation(source))
+		{
+			return to_string(ILLEGALMOVENOORIGINALPIECE);
+		}
+
+		retString = blackSide.movePiece(source, destination);
+
+		if (whiteSide.isOneOfMyPiecesAtXLocation(destination) && retString == "0")
 		{
 			eatPiece(destination);
 		}
-		blackSide.movePiece(source, destination);
 	}
+
+	if (retString == "0" || retString == "1" || retString == "8")
+	{
+		changeTurn();
+	}
+	return retString;
 }
 
 void Board::updateBoardString()
@@ -133,4 +162,10 @@ void Board::updateBoardString()
 void Board::setBoardString(const string newBoard)
 {
 	this->board = newBoard;
+}
+
+void Board::changeTurn()
+{
+	this->blackSide.changeTurnState();
+	this->whiteSide.changeTurnState();
 }

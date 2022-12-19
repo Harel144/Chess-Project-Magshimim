@@ -2,6 +2,7 @@
 
 Side::Side()
 {
+	this->thisSideTurn = false;
 }
 
 void Side::addPiece(Piece* newPiece)
