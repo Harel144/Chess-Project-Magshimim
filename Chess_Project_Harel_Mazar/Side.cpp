@@ -56,3 +56,33 @@ Side Side::operator=(Side& otherSide)
 	this->thisSideTurn = otherSide.isItSideTurn();
 	return *this;
 }
+
+//note: function is called only when there is a piece at the given location 100%
+Piece* Side::getPieceAtLocationX(const string location) const
+{
+	for (int i = 0; i < this->Pieces.size(); i++)
+	{
+		if (this->Pieces[i]->getPosition() == location)
+		{
+			return this->Pieces[i];
+		}
+	}
+}
+
+string Side::movePiece(const string sourcePosOfPiece, const string destinationPosOfPiece)
+{
+	string returnString = to_string(ILLEGALMOVENOORIGINALPIECE);
+
+	if (isOneOfMyPiecesAtXLocation(destinationPosOfPiece))
+	{
+		return to_string(ILLEGALMOVETHEREISALLY);
+	}
+
+	if (isOneOfMyPiecesAtXLocation(sourcePosOfPiece))
+	{
+		Piece* pieceAtXLocation = getPieceAtLocationX(sourcePosOfPiece);
+		returnString = pieceAtXLocation->move(destinationPosOfPiece);
+	}
+
+	return returnString;
+}

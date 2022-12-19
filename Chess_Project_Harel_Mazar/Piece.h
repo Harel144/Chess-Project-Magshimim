@@ -12,6 +12,7 @@
 #define LEGALMOVEMATE 8
 
 using std::string;
+using std::to_string;
 
 class Piece
 {

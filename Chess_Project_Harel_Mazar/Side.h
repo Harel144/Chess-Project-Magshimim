@@ -18,8 +18,10 @@ public:
 	void changeTurnState();
 	bool isItSideTurn() const;
 	bool isOneOfMyPiecesAtXLocation(const string location) const;
-
+	string movePiece(const string sourcePosOfPiece, const string destinationPosOfPiece);
 	Side operator=(Side& otherSide);
+
+	Piece* getPieceAtLocationX(const string location) const;
 
 private:
 	vector<Piece*> Pieces;

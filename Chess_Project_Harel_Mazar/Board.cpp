@@ -55,19 +55,14 @@ void Board::printBoard() const
 
 void Board::eatPiece(const string position)
 {
-	if (isWhiteTurn())
+	if (this->blackSide.isOneOfMyPiecesAtXLocation(position))
 	{
-		if (this->blackSide.isOneOfMyPiecesAtXLocation(position))
-		{
-			this->blackSide.removePiece(position);
-		}
+		this->blackSide.removePiece(position);
 	}
-	else
+
+	if (this->whiteSide.isOneOfMyPiecesAtXLocation(position))
 	{
-		if (this->whiteSide.isOneOfMyPiecesAtXLocation(position))
-		{
-			this->whiteSide.removePiece(position);
-		}
+		this->whiteSide.removePiece(position);
 	}
 }
 
@@ -94,4 +89,43 @@ void Board::setWhiteSide(Side& newWhiteSide)
 void Board::setBlackSide(Side& newBlackSide)
 {
 	this->blackSide = newBlackSide;
+}
+
+string Board::movePieceAtBoard(const string source, const string destination)
+{
+	if (isWhiteTurn())
+	{
+		if (blackSide.isOneOfMyPiecesAtXLocation(destination))
+		{
+			eatPiece(destination);
+		}
+		whiteSide.movePiece(source, destination);
+	}
+	else
+	{
+		if (whiteSide.isOneOfMyPiecesAtXLocation(destination))
+		{
+			eatPiece(destination);
+		}
+		blackSide.movePiece(source, destination);
+	}
+}
+
+void Board::updateBoardString()
+{
+	string newBoardStr;
+	string currPos = "xx";
+
+	for (int i = 0; i < 64; i++)
+	{
+		currPos[0] = (char)i % 8 + 97;
+		currPos[1] = to_string((int)i / 8)[0];
+
+		if(this->whiteSide.isOneOfMyPiecesAtXLocation(currPos))
+		{
+			newBoardStr[i] = this->whiteSide.getPieceAtLocationX(currPos)->getName()[0];
+		}
+	}
+
+	this->board = newBoardStr;
 }

@@ -17,6 +17,8 @@ public:
 	Side getWhiteSide();
 	void setWhiteSide(Side &newWhiteSide);
 	void setBlackSide(Side &newBlackSide);
+	string movePieceAtBoard(const string source, const string destination);
+	void updateBoardString();
 
 private:
 	string board;

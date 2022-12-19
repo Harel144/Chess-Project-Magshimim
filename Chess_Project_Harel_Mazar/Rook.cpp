@@ -7,12 +7,12 @@ Rook::Rook(const string name, const string type, const string position) : Piece(
 
 string Rook::move(const string newPosition)
 {
-	string returnString = "6";
+	string returnString = to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
 
 	if (isLegitMove(newPosition))
 	{
 		setPosition(newPosition);
-		returnString = "0";
+		returnString = to_string(LEGALMOVE);
 	}
 
 	return returnString;
