@@ -25,6 +25,7 @@ public:
 	string getName() const;
 	string getPosition() const;
 	string getType() const;
+	void setPosition(const string newPosition);
 
 	//other methods
 	virtual string move(const string newPosition) = 0;
@@ -35,9 +36,5 @@ private:
 	string name;
 	string type;
 	string position;
-
-protected: 
-	//methods
-	void setPosition(const string newPosition);
 
 };

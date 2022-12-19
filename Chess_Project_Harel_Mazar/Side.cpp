@@ -4,16 +4,18 @@ Side::Side()
 {
 }
 
-void Side::addPiece(const Piece& newPiece)
+void Side::addPiece(Piece* newPiece)
 {
 	this->Pieces.push_back(newPiece);
 }
 
 void Side::removePiece(const string position)
 {
+
 	for (int i = 0; i < this->Pieces.size(); i++)
 	{
-		if (this->Pieces[i].getPosition() == position)
+		Piece* currPiece = getPiecesVector()[i];
+		if(currPiece->getPosition() == position)
 		{
 			this->Pieces.erase(this->Pieces.begin() + i);
 			i = this->Pieces.size();
@@ -21,7 +23,7 @@ void Side::removePiece(const string position)
 	}
 }
 
-vector<Piece> Side::getPiecesVector() const
+vector<Piece*> Side::getPiecesVector() const
 {
 	return this->Pieces;
 }
@@ -40,7 +42,7 @@ bool Side::isOneOfMyPiecesAtXLocation(const string location) const
 {
 	for (int i = 0; i < this->Pieces.size(); i++)
 	{
-		if (this->Pieces[i].getPosition() == location)
+		if (this->Pieces[i]->getPosition() == location)
 		{
 			return true;
 		}
@@ -52,4 +54,5 @@ Side Side::operator=(Side& otherSide)
 {
 	this->Pieces = otherSide.getPiecesVector();
 	this->thisSideTurn = otherSide.isItSideTurn();
+	return *this;
 }

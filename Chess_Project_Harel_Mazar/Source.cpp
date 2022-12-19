@@ -7,6 +7,7 @@ in order to read and write information from and to the Backend
 #include "Pipe.h"
 #include <iostream>
 #include <thread>
+#include "Board.h"
 
 using std::cout;
 using std::endl;
@@ -45,8 +46,14 @@ void main()
 	char msgToGraphics[1024];
 	// msgToGraphics should contain the board string accord the protocol
 	// YOUR CODE
+	Board gameBoard = *(new Board());
+	
+	Side blackSide = gameBoard.getBlackSide();
+	Side whiteSide = gameBoard.getWhiteSide();
 
-	strcpy_s(msgToGraphics, "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"); // just example...
+	string currBoard = gameBoard.getBoardString();
+
+	strcpy_s(msgToGraphics, currBoard.c_str()); // just example...
 	
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
 

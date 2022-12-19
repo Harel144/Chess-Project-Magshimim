@@ -5,6 +5,23 @@ Board::Board()
 	this->blackSide = *(new Side());
 	this->whiteSide = *(new Side());
 	this->board = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1";
+
+	/*
+	adding rooks
+	*/
+
+	//black rooks
+	Rook* rook = new Rook("r", "Rook", "a8");
+	this->blackSide.addPiece(rook);
+	rook->setPosition("h8");
+	this->blackSide.addPiece(rook);
+
+	//white rooks
+	rook->setName("R");
+	rook->setPosition("a1");
+	this->whiteSide.addPiece(rook);
+	rook->setPosition("h1");
+	this->whiteSide.addPiece(rook);
 }
 
 bool Board::isWhiteTurn() const
@@ -22,7 +39,7 @@ string Board::getBoardString() const
 	return this->board;
 }
 
-string Board::printBoard() const
+void Board::printBoard() const
 {
 	for (int i = 0; i < 64; i++)
 	{

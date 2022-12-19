@@ -10,7 +10,7 @@ public:
 	bool isWhiteTurn() const;
 	bool isBlackTurn() const;
 	string getBoardString() const;
-	string printBoard() const;
+	void printBoard() const;
 	void eatPiece(const string position);
 	bool isSquareTaken(const string position);
 	Side getBlackSide();
