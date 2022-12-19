@@ -55,7 +55,20 @@ void Board::printBoard() const
 
 void Board::eatPiece(const string position)
 {
-
+	if (isWhiteTurn())
+	{
+		if (this->blackSide.isOneOfMyPiecesAtXLocation(position))
+		{
+			this->blackSide.removePiece(position);
+		}
+	}
+	else
+	{
+		if (this->whiteSide.isOneOfMyPiecesAtXLocation(position))
+		{
+			this->whiteSide.removePiece(position);
+		}
+	}
 }
 
 bool Board::isSquareTaken(const string position)
