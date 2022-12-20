@@ -28,19 +28,33 @@ Board::Board()
 	/*
 	adding bishops
 	*/
+
 	//black bishops
 	Bishop* bishopBlackOne = new Bishop("b", "Bishop", "c8");
 	Bishop* bishopBlackTwo = new Bishop("b", "Bishop", "f8");
 
 	//white bishops
-	Bishop* bishopWhiteOne = new Bishop("b", "Bishop", "c1");
-	Bishop* bishopWhiteTwo = new Bishop("b", "Bishop", "f1");
+	Bishop* bishopWhiteOne = new Bishop("B", "Bishop", "c1");
+	Bishop* bishopWhiteTwo = new Bishop("B", "Bishop", "f1");
 
 	this->blackSide.addPiece(bishopBlackOne);
 	this->blackSide.addPiece(bishopBlackTwo);
 
 	this->whiteSide.addPiece(bishopWhiteOne);
 	this->whiteSide.addPiece(bishopWhiteTwo);
+
+	/*
+	adding kings
+	*/
+
+	//black king
+	King* blackKing = new King("k", "King", "d8");
+	
+	//white king
+	King* whiteKing = new King("K", "King", "d1");
+
+	this->blackSide.addPiece(blackKing);
+	this->whiteSide.addPiece(whiteKing);
 }
 
 bool Board::isWhiteTurn() const
@@ -99,12 +113,12 @@ bool Board::isSquareTaken(const string position)
 	return blackSide.isOneOfMyPiecesAtXLocation(position) || whiteSide.isOneOfMyPiecesAtXLocation(position);
 }
 
-Side Board::getBlackSide()
+Side Board::getBlackSide() const
 {
 	return this->blackSide;
 }
 
-Side Board::getWhiteSide()
+Side Board::getWhiteSide() const
 {
 	return this->whiteSide;
 }
@@ -122,6 +136,7 @@ void Board::setBlackSide(Side& newBlackSide)
 string Board::movePieceAtBoard(const string source, const string destination)
 {
 	string retString;
+
 	if (isWhiteTurn())
 	{
 		if (blackSide.isOneOfMyPiecesAtXLocation(source))
@@ -129,7 +144,13 @@ string Board::movePieceAtBoard(const string source, const string destination)
 			return to_string(ILLEGALMOVENOORIGINALPIECE);
 		}
 
-		retString =  whiteSide.movePiece(source, destination);
+		retString = whiteSide.movePiece(source, destination);
+		
+		if (isKingChecked())
+		{
+			whiteSide.movePiece(destination, source);
+			retString = to_string(ILLEGALMOVESELFCHECK);
+		}
 
 		if (blackSide.isOneOfMyPiecesAtXLocation(destination) && retString == "0")
 		{
@@ -145,6 +166,12 @@ string Board::movePieceAtBoard(const string source, const string destination)
 
 		retString = blackSide.movePiece(source, destination);
 
+		if (isKingChecked())
+		{
+			blackSide.movePiece(destination, source);
+			retString = to_string(ILLEGALMOVESELFCHECK);
+		}
+
 		if (whiteSide.isOneOfMyPiecesAtXLocation(destination) && retString == "0")
 		{
 			eatPiece(destination);
@@ -155,6 +182,7 @@ string Board::movePieceAtBoard(const string source, const string destination)
 	{
 		changeTurn();
 	}
+
 	return retString;
 }
 
@@ -195,4 +223,34 @@ void Board::changeTurn()
 {
 	this->blackSide.changeTurnState();
 	this->whiteSide.changeTurnState();
+}
+
+bool Board::isKingChecked()
+{
+	if (isWhiteTurn())
+	{
+		if (blackSide.isOneOfMyPiecesCanReachXLocation(whiteSide.getKingLocation()))
+		{
+			this->whiteSide.setCheckState(true);
+			return true;
+		}
+		else
+		{
+			this->whiteSide.setCheckState(false);
+		}
+	}
+	else
+	{
+		if (whiteSide.isOneOfMyPiecesCanReachXLocation(blackSide.getKingLocation()))
+		{
+			this->whiteSide.setCheckState(true);
+			return true;
+		}
+		else
+		{
+			this->whiteSide.setCheckState(false);
+		}
+	}
+
+	return false;
 }

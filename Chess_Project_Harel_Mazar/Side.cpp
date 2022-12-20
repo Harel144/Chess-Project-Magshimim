@@ -3,6 +3,7 @@
 Side::Side()
 {
 	this->thisSideTurn = false;
+	this->isChecked = false;
 }
 
 void Side::addPiece(Piece* newPiece)
@@ -86,4 +87,36 @@ string Side::movePiece(const string sourcePosOfPiece, const string destinationPo
 	}
 
 	return returnString;
+}
+
+bool Side::isOneOfMyPiecesCanReachXLocation(const string location) const
+{
+	for (int i = 0; i < this->Pieces.size(); i++)
+	{
+		string oldPos = this->Pieces[i]->getPosition();
+
+		if (this->Pieces[i]->move(location) == "0")
+		{
+			this->Pieces[i]->move(oldPos);
+			return true;
+		}
+		this->Pieces[i]->move(oldPos);
+	}
+	return false;
+}
+
+string Side::getKingLocation() const
+{
+	for (int i = 0; i < this->Pieces.size(); i++)
+	{
+		if (this->Pieces[i]->getType() == "King")
+		{
+			return this->Pieces[i]->getPosition();
+		}
+	}
+}
+
+void Side::setCheckState(const bool check)
+{
+	this->isChecked = check;
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include "Bishop.h"
 #include "Rook.h"
+#include "King.h"
+
 #include <vector>
 
 using std::vector;
@@ -24,9 +26,12 @@ public:
 	bool isOneOfMyPiecesAtXLocation(const string location) const;
 	bool isOneOfMyPiecesCanReachXLocation(const string location) const;
 	Piece* getPieceAtLocationX(const string location) const;
+	string getKingLocation() const;
+	void setCheckState(const bool check);
+
 
 private:
 	vector<Piece*> Pieces;
 	bool thisSideTurn;
-
+	bool isChecked;
 };

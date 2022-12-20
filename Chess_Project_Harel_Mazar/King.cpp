@@ -4,16 +4,6 @@ King::King(const string name, const string type, const string position) : Piece(
 {
 }
 
-bool King::GetisChecked() const
-{
-	return this->isCheacked;
-}
-
-void King::changeCheck()
-{
-	this->isCheacked = !this->isCheacked;
-}
-
 string King::move(const string newPosition)
 {
 	string returnString = to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
@@ -31,11 +21,14 @@ bool King::isLegitMove(const string position)
 {
 	string currPosition = getPosition();
 
-	//if someone tried to move more than 1 square
-	if (std::abs(currPosition[0] - position[0]) != 1 || std::abs(currPosition[1] - position[1]) != 1)
+	bool diagonalOnce = std::abs(currPosition[1] - position[1]) == 1 && std::abs(currPosition[0] - position[0]) == 1;
+	bool straightOnce = (std::abs(currPosition[0] - position[0]) == 1 && std::abs(currPosition[1] - position[1]) == 0) || (std::abs(currPosition[0] - position[0]) == 0 && std::abs(currPosition[1] - position[1]) == 1);
+
+	if (straightOnce || diagonalOnce)
 	{
-		return false;
+		return true;
 	}
 
-	return true;
+	return false;
+
 }
