@@ -26,8 +26,8 @@ bool Bishop::isLegitMove(const string position)
 {
 	string currPosition = getPosition();
 
-	//if someone tried to make a straight move with the bishop
-	if (currPosition[0] == position[0] || position[1] == position[1])
+	//if someone tried to make an undiagonal move with the bishop
+	if (std::abs(currPosition[0] - position[0]) != std::abs(currPosition[1] - position[1]))
 	{
 		return false;
 	}

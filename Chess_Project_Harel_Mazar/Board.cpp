@@ -8,7 +8,6 @@ Board::Board()
 
 	this->blackSide.changeTurnState();
 
-
 	/*
 	adding rooks
 	*/
@@ -25,6 +24,23 @@ Board::Board()
 
 	this->whiteSide.addPiece(rookWhiteOne);
 	this->whiteSide.addPiece(rookWhiteTwo);
+
+	/*
+	adding bishops
+	*/
+	//black bishops
+	Bishop* bishopBlackOne = new Bishop("b", "Bishop", "c8");
+	Bishop* bishopBlackTwo = new Bishop("b", "Bishop", "f8");
+
+	//white bishops
+	Bishop* bishopWhiteOne = new Bishop("b", "Bishop", "c1");
+	Bishop* bishopWhiteTwo = new Bishop("b", "Bishop", "f1");
+
+	this->blackSide.addPiece(bishopBlackOne);
+	this->blackSide.addPiece(bishopBlackTwo);
+
+	this->whiteSide.addPiece(bishopWhiteOne);
+	this->whiteSide.addPiece(bishopWhiteTwo);
 }
 
 bool Board::isWhiteTurn() const
