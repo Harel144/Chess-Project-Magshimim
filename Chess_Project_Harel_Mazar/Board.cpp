@@ -42,16 +42,18 @@ string Board::getBoardString() const
 	return this->board;
 }
 
+//note: mostly for fun.
 void Board::printBoard() const
 {
-	for (int i = 0; i < 64; i++)
+	//since the board starts from the white at the frontend and except the sending to the frontend I refer to this string as if black is the bottom one, i print it reveresed.
+	for (int i = 63; i >= 0; i--)
 	{
+		std::cout << getBoardString()[i] << " ";
+
 		if (i % 8 == 0 && i != 0)
 		{
 			std::cout << std::endl;
 		}
-
-		std::cout << getBoardString()[i] << " ";
 	}
 
 	std::cout << std::endl;
@@ -140,19 +142,28 @@ string Board::movePieceAtBoard(const string source, const string destination)
 	return retString;
 }
 
+//mostly for fun.
 void Board::updateBoardString()
 {
-	string newBoardStr;
+	string newBoardStr = this->board;
 	string currPos = "xx";
 
 	for (int i = 0; i < 64; i++)
 	{
 		currPos[0] = (char)i % 8 + 97;
-		currPos[1] = to_string((int)i / 8)[0];
+		currPos[1] = to_string((int)(i / 8) + 1)[0];
 
 		if(this->whiteSide.isOneOfMyPiecesAtXLocation(currPos))
 		{
 			newBoardStr[i] = this->whiteSide.getPieceAtLocationX(currPos)->getName()[0];
+		}
+		else if (this->blackSide.isOneOfMyPiecesAtXLocation(currPos))
+		{
+			newBoardStr[i] = this->blackSide.getPieceAtLocationX(currPos)->getName()[0];
+		}
+		else
+		{
+			newBoardStr[i] = '#';
 		}
 	}
 	

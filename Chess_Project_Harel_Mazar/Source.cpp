@@ -54,14 +54,16 @@ void main()
 	string currBoard = gameBoard.getBoardString();
 
 	strcpy_s(msgToGraphics, currBoard.c_str()); // just example...
-	
+
+	gameBoard.setBoardString(currBoard.substr(0, gameBoard.getBoardString().size() - 1));
+
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
-	gameBoard.printBoard();
 	// get message from graphics
 	string msgFromGraphics = p.getMessageFromGraphics();
 
 	while (msgFromGraphics != "quit")
 	{
+		gameBoard.printBoard();
 		// should handle the string the sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
 
@@ -83,6 +85,8 @@ void main()
 
 		// get message from graphics
 		msgFromGraphics = p.getMessageFromGraphics();
+
+		gameBoard.updateBoardString();
 	}
 
 	p.close();

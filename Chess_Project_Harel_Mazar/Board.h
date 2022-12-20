@@ -19,13 +19,14 @@ public:
 	void setBlackSide(Side &newBlackSide);
 	string movePieceAtBoard(const string source, const string destination);
 	void updateBoardString();
+	void setBoardString(const string newBoard);
+
 
 private:
 	string board;
 	Side blackSide;
 	Side whiteSide;
 
-	void setBoardString(const string newBoard);
 	void changeTurn();
 
 };
