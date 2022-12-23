@@ -29,7 +29,7 @@ public:
 	Piece* getPieceAtLocationX(const string location) const;
 	string getKingLocation() const;
 	void setCheckState(const bool check);
-
+	bool isLegitEatingMoveForPawn(const string source, const string destination);
 
 private:
 	vector<Piece*> Pieces;

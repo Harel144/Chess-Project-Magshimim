@@ -120,3 +120,26 @@ void Side::setCheckState(const bool check)
 {
 	this->isChecked = check;
 }
+
+bool Side::isLegitEatingMoveForPawn(const string source,const string destination)
+{
+	bool diagonalOnce = false;
+	Piece* pawnPiece = getPieceAtLocationX(destination);	//when function runs, the destination supposed to be the place of the pawn.
+
+	//black can eat 1 diagonal forward which is backward for white
+	if (pawnPiece->getName() == "P")
+	{
+		diagonalOnce = source[1] - destination[1] == -1 && std::abs(source[0] - destination[0]) == 1;
+	}
+	else
+	{
+		diagonalOnce = source[1] - destination[1] == -1 && std::abs(source[0] - destination[0]) == 1;
+	}
+
+	if (diagonalOnce)
+	{
+		return true;
+	}
+
+	return false;
+}

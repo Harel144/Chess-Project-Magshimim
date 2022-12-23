@@ -42,6 +42,9 @@
     <ClInclude Include="King.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Pawn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Piece.cpp">
@@ -67,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="King.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pawn.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

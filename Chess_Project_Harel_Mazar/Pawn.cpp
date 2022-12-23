@@ -8,7 +8,7 @@ string Pawn::move(const string newPosition)
 {
 	string returnString = to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
 
-	if (isLegitMove(newPosition))
+	if (isLegitMove(newPosition) || isLegitEatingMove(newPosition))
 	{
 		setPosition(newPosition);
 		returnString = to_string(LEGALMOVE);
