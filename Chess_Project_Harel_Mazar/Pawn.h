@@ -8,7 +8,4 @@ public:
 	virtual string move(const string newPosition);
 	virtual bool isLegitMove(const string position);
 	bool isLegitEatingMove(const string position);
-
-private:
-	bool isFirstMove;
 };

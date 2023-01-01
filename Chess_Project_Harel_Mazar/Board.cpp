@@ -162,6 +162,14 @@ string Board::movePieceAtBoard(const string source, const string destination)
 			return to_string(ILLEGALMOVENOORIGINALPIECE);
 		}
 
+		if (whiteSide.getPieceAtLocationX(source)->getName() == "P")
+		{
+			if (whiteSide.getPieceAtLocationX(source)->isItFirstMove() && blackSide.isOneOfMyPiecesAtXLocation(destination))
+			{
+				return to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
+			}
+		}
+		bool flagForPawn = whiteSide.getPieceAtLocationX(source)->isLegitMove(destination);
 		retString = whiteSide.movePiece(source, destination);
 		
 		if (isKingChecked())
@@ -171,7 +179,7 @@ string Board::movePieceAtBoard(const string source, const string destination)
 			return retString;
 		}
 
-		if (retString == "0" && whiteSide.getPieceAtLocationX(destination)->getName() == "P" && whiteSide.isLegitEatingMoveForPawn(source, destination))
+		if (retString == "0" && whiteSide.getPieceAtLocationX(destination)->getName() == "P" && whiteSide.isLegitEatingMoveForPawn(source, destination) && !flagForPawn)
 		{
 			if (blackSide.isOneOfMyPiecesAtXLocation(destination))
 			{

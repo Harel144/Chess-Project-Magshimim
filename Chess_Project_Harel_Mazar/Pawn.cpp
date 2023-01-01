@@ -2,15 +2,18 @@
 
 Pawn::Pawn(const string name, const string type, const string position) : Piece(name, type, position)
 {
-	this->isFirstMove = true;
+	changePawnMove();
 }
 
 string Pawn::move(const string newPosition)
 {
 	string returnString = to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
-
 	if (isLegitMove(newPosition) || isLegitEatingMove(newPosition))
 	{
+		if (isItFirstMove())
+		{
+			changePawnMove();
+		}
 		setPosition(newPosition);
 		returnString = to_string(LEGALMOVE);
 	}
@@ -24,17 +27,15 @@ bool Pawn::isLegitMove(const string position)
 	bool straightOnce = false;
 
 	//black can move 1 forward which is backward for white
-	if (isFirstMove)
+	if (isItFirstMove())
 	{
-		isFirstMove = false;
-
 		if (this->getName() == "P")
 		{
-			straightOnce = (currPosition[1] - position[1] == -2) || (currPosition[1] - position[1] == -1);
+			straightOnce = ((currPosition[1] - position[1] == -2) || (currPosition[1] - position[1] == -1)) && (currPosition[0] - position[0] == 0);
 		}
 		else
 		{
-			straightOnce = (currPosition[1] - position[1] == 2) || (currPosition[1] - position[1] == 1);
+			straightOnce = (currPosition[1] - position[1] == 2) || (currPosition[1] - position[1] == 1) && (currPosition[0] - position[0] == 0);
 		}
 
 	}
@@ -42,11 +43,11 @@ bool Pawn::isLegitMove(const string position)
 	{
 		if (this->getName() == "P")
 		{
-			straightOnce = currPosition[1] - position[1] == -1;
+			straightOnce = currPosition[1] - position[1] == -1 && (currPosition[0] - position[0] == 0);
 		}
 		else
 		{
-			straightOnce = currPosition[1] - position[1] == 1;
+			straightOnce = currPosition[1] - position[1] == 1 && (currPosition[0] - position[0] == 0);
 		}
 
 	}
@@ -76,6 +77,10 @@ bool Pawn::isLegitEatingMove(const string position)
 
 	if (diagonalOnce)
 	{
+		if (isItFirstMove())
+		{
+			changePawnMove();
+		}
 		return true;
 	}
 

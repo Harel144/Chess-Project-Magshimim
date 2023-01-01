@@ -136,10 +136,5 @@ bool Side::isLegitEatingMoveForPawn(const string source,const string destination
 		diagonalOnce = source[1] - destination[1] == -1 && std::abs(source[0] - destination[0]) == 1;
 	}
 
-	if (diagonalOnce)
-	{
-		return true;
-	}
-
-	return false;
+	return diagonalOnce;
 }

@@ -71,8 +71,14 @@ void main()
 		string destination = msgFromGraphics.substr(2, 2);
 
 		// YOUR CODE
-		strcpy_s(msgToGraphics, gameBoard.movePieceAtBoard(source, destination).c_str()); // msgToGraphics should contain the result of the operation
-
+		if (source != destination)
+		{
+			strcpy_s(msgToGraphics, gameBoard.movePieceAtBoard(source, destination).c_str()); // msgToGraphics should contain the result of the operation
+		}
+		else
+		{
+			strcpy_s(msgToGraphics, to_string(ILLEGALMOVENOMOVE).c_str());
+		}
 		/******* JUST FOR EREZ DEBUGGING ******/
 		//int r = rand() % 10; // just for debugging......
 		//msgToGraphics[0] = (char)(1 + '0');

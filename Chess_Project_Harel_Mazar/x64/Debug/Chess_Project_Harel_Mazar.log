@@ -1,10 +1,1 @@
-﻿  Board.cpp
-  Pawn.cpp
-  Side.cpp
-C:\Users\test0\source\repos\Ex7_And_8_Harel_Mazar\Chess_Project_Harel_Mazar\Side.cpp(23,27): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  Source.cpp
-C:\Users\test0\source\repos\Ex7_And_8_Harel_Mazar\Chess_Project_Harel_Mazar\Source.cpp(18,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
-  Generating Code...
-C:\Users\test0\source\repos\Ex7_And_8_Harel_Mazar\Chess_Project_Harel_Mazar\Side.cpp(72): warning C4715: 'Side::getPieceAtLocationX': not all control paths return a value
-C:\Users\test0\source\repos\Ex7_And_8_Harel_Mazar\Chess_Project_Harel_Mazar\Side.cpp(117): warning C4715: 'Side::getKingLocation': not all control paths return a value
-  Chess_Project_Harel_Mazar.vcxproj -> C:\Users\test0\source\repos\Ex7_And_8_Harel_Mazar\Chess_Project_Harel_Mazar\x64\Debug\Chess_Project_Harel_Mazar.exe
+﻿  Chess_Project_Harel_Mazar.vcxproj -> C:\Users\test0\source\repos\Ex7_And_8_Harel_Mazar\Chess_Project_Harel_Mazar\x64\Debug\Chess_Project_Harel_Mazar.exe

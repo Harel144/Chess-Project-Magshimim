@@ -10,6 +10,7 @@ Piece::Piece(const string name, const string type, const string position)
 	this->name = name;
 	this->position = position;
 	this->type = type;
+	this->isItFirstPawnMove = false;
 }
 
 /*
@@ -70,4 +71,14 @@ output: type of the piece.
 string Piece::getType() const
 {
 	return this->type;
+}
+
+bool Piece::isItFirstMove() const
+{
+	return this->isItFirstPawnMove;
+}
+
+void Piece::changePawnMove()
+{
+	this->isItFirstPawnMove = !this->isItFirstPawnMove;
 }

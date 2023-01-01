@@ -23,9 +23,11 @@ public:
 	//setters and getters
 	void setName(const string name);
 	void setType(const string type);
+	void changePawnMove();
 	string getName() const;
 	string getPosition() const;
 	string getType() const;
+	bool isItFirstMove() const;
 	void setPosition(const string newPosition);
 
 	//other methods
@@ -37,5 +39,5 @@ private:
 	string name;
 	string type;
 	string position;
-
+	bool isItFirstPawnMove;
 };
