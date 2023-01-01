@@ -204,25 +204,39 @@ string Board::movePieceAtBoard(const string source, const string destination)
 			return to_string(ILLEGALMOVENOORIGINALPIECE);
 		}
 
+		if (!blackSide.isOneOfMyPiecesAtXLocation(source))
+		{
+			return to_string(ILLEGALMOVENOORIGINALPIECE);
+		}
+
+		if (blackSide.getPieceAtLocationX(source)->getName() == "P")
+		{
+			if (blackSide.getPieceAtLocationX(source)->isItFirstMove() && whiteSide.isOneOfMyPiecesAtXLocation(destination))
+			{
+				return to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
+			}
+		}
+		bool flagForPawn = blackSide.getPieceAtLocationX(source)->isLegitMove(destination);
 		retString = blackSide.movePiece(source, destination);
 
 		if (isKingChecked())
 		{
 			blackSide.movePiece(destination, source);
 			retString = to_string(ILLEGALMOVESELFCHECK);
+			return retString;
 		}
 
-		if (retString == "0" && blackSide.getPieceAtLocationX(destination)->getName() == "P" && blackSide.isLegitEatingMoveForPawn(source, destination))
+		if (retString == "0" && blackSide.getPieceAtLocationX(destination)->getName() == "P" && blackSide.isLegitEatingMoveForPawn(source, destination) && !flagForPawn)
 		{
-			if (whiteSide.isOneOfMyPiecesAtXLocation(destination))
+			if (blackSide.isOneOfMyPiecesAtXLocation(destination))
 			{
 				eatPiece(destination);
 			}
 			else
 			{
 				//forcing pawn back
-				 blackSide.getPieceAtLocationX(destination)->setPosition(source);
-				 retString = to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
+				blackSide.getPieceAtLocationX(destination)->setPosition(source);
+				retString = to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
 			}
 		}
 		else if (whiteSide.isOneOfMyPiecesAtXLocation(destination) && retString == "0")
