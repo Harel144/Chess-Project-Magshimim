@@ -10,7 +10,7 @@ Board::Board()
 {
 	this->blackSide = *(new Side());
 	this->whiteSide = *(new Side());
-	this->board = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0";
+	this->board = "rnbqkbnrpppppppp################################PPPPPPPPRNBQKBNR0";
 
 	//which side is beginning.
 	this->whiteSide.changeTurnState();
@@ -32,6 +32,15 @@ Board::Board()
 	this->whiteSide.addPiece(rookWhiteOne);
 	this->whiteSide.addPiece(rookWhiteTwo);
 
+	/*
+	adding Queens
+	*/
+	Queen* blackQueen = new Queen("q", "Queen", "d8");
+	Queen* whiteQueen = new Queen("Q", "Queen", "d1");
+
+	this->whiteSide.addPiece(whiteQueen);
+	this->blackSide.addPiece(blackQueen);
+	
 	/*
 	adding bishops
 	*/
@@ -55,10 +64,10 @@ Board::Board()
 	*/
 
 	//black king
-	King* blackKing = new King("k", "King", "d8");
+	King* blackKing = new King("k", "King", "e8");
 	
 	//white king
-	King* whiteKing = new King("K", "King", "d1");
+	King* whiteKing = new King("K", "King", "e1");
 
 	this->blackSide.addPiece(blackKing);
 	this->whiteSide.addPiece(whiteKing);

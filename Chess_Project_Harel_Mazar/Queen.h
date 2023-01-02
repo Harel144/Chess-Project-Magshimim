@@ -3,6 +3,7 @@
 
 class Queen : public Piece
 {
+public:
 	//methods
 	Queen(const string name, const string type, const string position);
 	virtual string move(const string newPosition);

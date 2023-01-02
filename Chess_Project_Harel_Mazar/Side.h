@@ -3,6 +3,7 @@
 #include "Rook.h"
 #include "King.h"
 #include "Pawn.h"
+#include "Queen.h"
 
 #include <vector>
 
