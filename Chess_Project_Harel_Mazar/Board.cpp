@@ -1,11 +1,18 @@
 #include "Board.h"
 
+/*
+Construcor of board.
+The function is adding all the pieces, determine which side playing first and the board that is going to show up at the frontend.
+input: none.
+output: none.
+*/
 Board::Board()
 {
 	this->blackSide = *(new Side());
 	this->whiteSide = *(new Side());
 	this->board = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0";
 
+	//which side is beginning.
 	this->whiteSide.changeTurnState();
 
 	/*
@@ -70,16 +77,32 @@ Board::Board()
 	this->whiteSide.addPiece(whitePawnOne);
 }
 
+/*
+this function returns if it's white turn or not.
+input: none.
+output: true or false.
+*/
 bool Board::isWhiteTurn() const
 {
 	return this->whiteSide.isItSideTurn();
 }
 
+/*
+this function returns if it's white turn or not.
+input: none.
+output: true or false.
+*/
 bool Board::isBlackTurn() const
 {
 	return this->blackSide.isItSideTurn();
 }
 
+
+/*
+this function returns the board as a string.
+input: none.
+output: board as a string.
+*/
 string Board::getBoardString() const
 {
 	return this->board;
@@ -102,7 +125,11 @@ void Board::printBoard() const
 	std::cout << std::endl;
 }
 
-
+/*
+this function is removing a piece from a given position.
+input: a position to remove a piece from.
+output: none.
+*/
 void Board::eatPiece(const string position)
 {
 	if (isWhiteTurn())
