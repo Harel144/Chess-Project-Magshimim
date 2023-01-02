@@ -198,6 +198,11 @@ string Board::movePieceAtBoard(const string source, const string destination)
 			return to_string(ILLEGALMOVENOORIGINALPIECE);
 		}
 
+		if (!isOneOfWhitePiecesCanReachLocationX(source, destination))
+		{
+			return to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
+		}
+
 		if (whiteSide.getPieceAtLocationX(source)->getName() == "P")
 		{
 			if (whiteSide.getPieceAtLocationX(source)->isItFirstMove() && blackSide.isOneOfMyPiecesAtXLocation(destination))
@@ -208,6 +213,28 @@ string Board::movePieceAtBoard(const string source, const string destination)
 		bool flagForPawn = whiteSide.getPieceAtLocationX(source)->isLegitMove(destination);
 		retString = whiteSide.movePiece(source, destination);
 		
+		if (blackSide.isOneOfMyPiecesAtXLocation(destination) && retString == "0" && whiteSide.getPieceAtLocationX(destination)->getName() != "P")
+		{
+			//if the eating isn't preventing check i will remake the piece.
+			Piece* tempPiece = blackSide.getPieceAtLocationX(destination);
+			string name, type, position;
+			name = tempPiece->getName();
+			type = tempPiece->getType();
+			position = tempPiece->getPosition();
+
+			eatPiece(destination);
+
+			if (isKingChecked())
+			{
+				whiteSide.movePiece(destination, source);
+				//adding the piece back
+				blackSide.addPiece(createPiece(name, type, position));
+				retString = to_string(ILLEGALMOVESELFCHECK);
+				return retString;
+			}
+
+		}
+
 		if (isKingChecked())
 		{
 			whiteSide.movePiece(destination, source);
@@ -219,7 +246,24 @@ string Board::movePieceAtBoard(const string source, const string destination)
 		{
 			if (blackSide.isOneOfMyPiecesAtXLocation(destination))
 			{
+				//if the eating isn't preventing check i will remake the piece.
+				Piece* tempPiece = blackSide.getPieceAtLocationX(destination);
+				string name, type, position;
+				name = tempPiece->getName();
+				type = tempPiece->getType();
+				position = tempPiece->getPosition();
+
 				eatPiece(destination);
+
+				if (isKingChecked())
+				{
+					//forcing pawn back
+					whiteSide.getPieceAtLocationX(destination)->setPosition(source);
+					//adding the piece back
+					blackSide.addPiece(createPiece(name, type, position));
+					retString = to_string(ILLEGALMOVESELFCHECK);
+					return retString;
+				}
 			}
 			else
 			{
@@ -227,10 +271,6 @@ string Board::movePieceAtBoard(const string source, const string destination)
 				whiteSide.getPieceAtLocationX(destination)->setPosition(source);
 				retString = to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
 			}
-		}
-		else if (blackSide.isOneOfMyPiecesAtXLocation(destination) && retString == "0")
-		{
-			eatPiece(destination);
 		}
 	}
 	else
@@ -245,7 +285,12 @@ string Board::movePieceAtBoard(const string source, const string destination)
 			return to_string(ILLEGALMOVENOORIGINALPIECE);
 		}
 
-		if (blackSide.getPieceAtLocationX(source)->getName() == "P")
+		if (!isOneOfBlackPiecesCanReachLocationX(source, destination))
+		{
+			return to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
+		}
+
+		if (blackSide.getPieceAtLocationX(source)->getName() == "p")
 		{
 			if (blackSide.getPieceAtLocationX(source)->isItFirstMove() && whiteSide.isOneOfMyPiecesAtXLocation(destination))
 			{
@@ -255,7 +300,13 @@ string Board::movePieceAtBoard(const string source, const string destination)
 		bool flagForPawn = blackSide.getPieceAtLocationX(source)->isLegitMove(destination);
 		retString = blackSide.movePiece(source, destination);
 
-		if (isKingChecked())
+
+		if (whiteSide.isOneOfMyPiecesAtXLocation(destination) && retString == "0" && blackSide.getPieceAtLocationX(destination)->getName() != "P")
+		{
+			eatPiece(destination);
+		}
+
+		if (isKingChecked() && retString == "0")
 		{
 			blackSide.movePiece(destination, source);
 			retString = to_string(ILLEGALMOVESELFCHECK);
@@ -266,7 +317,24 @@ string Board::movePieceAtBoard(const string source, const string destination)
 		{
 			if (blackSide.isOneOfMyPiecesAtXLocation(destination))
 			{
+				//if the eating isn't preventing check i will remake the piece.
+				Piece* tempPiece = whiteSide.getPieceAtLocationX(destination);
+				string name, type, position;
+				name = tempPiece->getName();
+				type = tempPiece->getType();
+				position = tempPiece->getPosition();
+
 				eatPiece(destination);
+
+				if (isKingChecked())
+				{
+					//forcing pawn back
+					blackSide.getPieceAtLocationX(destination)->setPosition(source);
+					//adding the piece back
+					whiteSide.addPiece(createPiece(name, type, position));
+					retString = to_string(ILLEGALMOVESELFCHECK);
+					return retString;
+				}
 			}
 			else
 			{
@@ -274,10 +342,6 @@ string Board::movePieceAtBoard(const string source, const string destination)
 				blackSide.getPieceAtLocationX(destination)->setPosition(source);
 				retString = to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
 			}
-		}
-		else if (whiteSide.isOneOfMyPiecesAtXLocation(destination) && retString == "0")
-		{
-			eatPiece(destination);
 		}
 	}
 
@@ -355,5 +419,155 @@ bool Board::isKingChecked()
 		}
 	}
 
+	return false;
+}
+
+Piece* Board::createPiece(const string name, const string type, const string position)
+{
+	if (type == "Rook")
+	{
+		Rook* newRook = new Rook(name, type, position);
+		return newRook;
+	}
+	if (type == "Queen")
+	{
+		Queen* newRook = new Queen(name, type, position);
+		return newRook;
+	}
+	if (type == "Bishop")
+	{
+		Bishop* newRook = new Bishop(name, type, position);
+		return newRook;
+	}
+	if (type == "Pawn")
+	{
+		Pawn* newRook = new Pawn(name, type, position);
+		return newRook;
+	}
+
+	if (type == "Knight")
+	{
+		Rook* newRook = new Rook(name, type, position);
+		return newRook;
+	}
+}
+
+bool Board::isOneOfBlackPiecesCanReachLocationX(const string srcPosition, const string destPosition) const
+{
+	return this->blackSide.isOneOfMyPiecesCanReachXLocation(destPosition) && !isThereAnInterrupterPieceAtPath(srcPosition,destPosition);
+}
+
+bool Board::isOneOfWhitePiecesCanReachLocationX(const string srcPosition, const string destPosition) const
+{
+	return this->whiteSide.isOneOfMyPiecesCanReachXLocation(destPosition) && !isThereAnInterrupterPieceAtPath(srcPosition, destPosition);
+}
+
+bool Board::isThereAnInterrupterPieceAtPath(string srcPosition, string destPosition) const
+{
+	int srcValue = srcPosition[0] + srcPosition[1];
+	int dstValue = destPosition[0] + destPosition[1];
+
+	if (destPosition > srcPosition)
+	{
+		if (srcPosition[0] == destPosition[0])
+		{
+			while (destPosition[1] > srcPosition[1])
+			{
+				destPosition[1] = destPosition[1] - 1;
+
+				if (destPosition != srcPosition)
+				{
+					if (whiteSide.isOneOfMyPiecesAtXLocation(destPosition) || blackSide.isOneOfMyPiecesAtXLocation(destPosition))
+					{
+						return true;
+					}
+				}
+			}
+		}
+
+		if (srcPosition[1] == destPosition[1])
+		{
+			while (destPosition[0] > srcPosition[0])
+			{
+				destPosition[0] = destPosition[0] - 1;
+
+				if (destPosition != srcPosition)
+				{
+					if (whiteSide.isOneOfMyPiecesAtXLocation(destPosition) || blackSide.isOneOfMyPiecesAtXLocation(destPosition))
+					{
+						return true;
+					}
+				}
+			}
+		}
+
+		if (srcPosition[0] != destPosition[0] && srcPosition[1] != destPosition[1])
+		{
+			while (destPosition[0] > srcPosition[0] && destPosition[1] > srcPosition[1])
+			{
+				destPosition[0] = destPosition[0] - 1;
+				destPosition[1] = destPosition[1] - 1;
+
+				if (destPosition != srcPosition)
+				{
+					if (whiteSide.isOneOfMyPiecesAtXLocation(destPosition) || blackSide.isOneOfMyPiecesAtXLocation(destPosition))
+					{
+						return true;
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		if (srcPosition[0] == destPosition[0])
+		{
+			while (destPosition[1] < srcPosition[1])
+			{
+				srcPosition[1] = srcPosition[1] - 1;
+
+				if (destPosition != srcPosition)
+				{
+					if (whiteSide.isOneOfMyPiecesAtXLocation(srcPosition) || blackSide.isOneOfMyPiecesAtXLocation(srcPosition))
+					{
+						return true;
+					}
+				}
+			}
+		}
+
+		if (srcPosition[1] == destPosition[1])
+		{
+			while (destPosition[0] < srcPosition[0])
+			{
+				srcPosition[0] = srcPosition[0] - 1;
+
+				if (destPosition != srcPosition)
+				{
+					if (whiteSide.isOneOfMyPiecesAtXLocation(srcPosition) || blackSide.isOneOfMyPiecesAtXLocation(srcPosition))
+					{
+						return true;
+					}
+				}
+			}
+		}
+
+		if (srcPosition[0] != destPosition[0] && srcPosition[1] != destPosition[1])
+		{
+			while (destPosition[0] < srcPosition[0] && destPosition[1] < srcPosition[1])
+			{
+				srcPosition[0] = srcPosition[0] - 1;
+				srcPosition[1] = srcPosition[1] - 1;
+
+				if (destPosition != srcPosition)
+				{
+					if (whiteSide.isOneOfMyPiecesAtXLocation(srcPosition) || blackSide.isOneOfMyPiecesAtXLocation(srcPosition))
+					{
+						return true;
+					}
+				}
+			}
+		}
+	}
 	return false;
 }

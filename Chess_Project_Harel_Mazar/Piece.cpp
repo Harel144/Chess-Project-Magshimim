@@ -73,12 +73,17 @@ string Piece::getType() const
 	return this->type;
 }
 
+/*
+this function returns if it's the first pawn move.
+input: none.
+output: this->isItFirstPawnMove field's value.
+*/
 bool Piece::isItFirstMove() const
 {
 	return this->isItFirstPawnMove;
 }
 
-void Piece::changePawnMove()
+void Piece::changePawnMove(const bool newState)
 {
-	this->isItFirstPawnMove = !this->isItFirstPawnMove;
+	this->isItFirstPawnMove = newState;
 }

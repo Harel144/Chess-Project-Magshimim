@@ -23,7 +23,7 @@ public:
 	//setters and getters
 	void setName(const string name);
 	void setType(const string type);
-	void changePawnMove();
+	void changePawnMove(const bool newState);
 	string getName() const;
 	string getPosition() const;
 	string getType() const;
