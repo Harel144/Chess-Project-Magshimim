@@ -95,12 +95,10 @@ bool Side::isOneOfMyPiecesCanReachXLocation(const string location) const
 	{
 		string oldPos = this->Pieces[i]->getPosition();
 
-		if (this->Pieces[i]->move(location) == "0")
+		if (this->Pieces[i]->isLegitMove(location))
 		{
-			this->Pieces[i]->move(oldPos);
 			return true;
 		}
-		this->Pieces[i]->move(oldPos);
 	}
 	return false;
 }
