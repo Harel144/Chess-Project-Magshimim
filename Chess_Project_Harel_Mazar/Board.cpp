@@ -33,6 +33,24 @@ Board::Board()
 	this->whiteSide.addPiece(rookWhiteTwo);
 
 	/*
+	adding knights
+	*/
+
+	//black knights
+	Knight* knightBlackOne = new Knight("k", "Knight", "b8");
+	Knight* knightBlackTwo = new Knight("k", "Knight", "g8");
+	
+	//white knights
+	Knight* knightWhiteOne = new Knight("K", "Knight", "b1");
+	Knight* knightWhiteTwo = new Knight("K", "Knight", "g1");
+
+	this->blackSide.addPiece(knightBlackOne);
+	this->blackSide.addPiece(knightBlackTwo);
+
+	this->whiteSide.addPiece(knightWhiteOne);
+	this->whiteSide.addPiece(knightWhiteTwo);
+
+	/*
 	adding Queens
 	*/
 	Queen* blackQueen = new Queen("q", "Queen", "d8");
@@ -198,7 +216,7 @@ string Board::movePieceAtBoard(const string source, const string destination)
 			return to_string(ILLEGALMOVENOORIGINALPIECE);
 		}
 
-		if (!isOneOfWhitePiecesCanReachLocationX(source, destination))
+		if (whiteSide.getPieceAtLocationX(source)->getType() != "Knight" && (!isOneOfWhitePiecesCanReachLocationX(source, destination)))
 		{
 			return to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
 		}
@@ -285,7 +303,7 @@ string Board::movePieceAtBoard(const string source, const string destination)
 			return to_string(ILLEGALMOVENOORIGINALPIECE);
 		}
 
-		if (!isOneOfBlackPiecesCanReachLocationX(source, destination))
+		if (!isOneOfBlackPiecesCanReachLocationX(source, destination) && blackSide.getPieceAtLocationX(source)->getType() != "Knight")
 		{
 			return to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
 		}
@@ -313,7 +331,7 @@ string Board::movePieceAtBoard(const string source, const string destination)
 			return retString;
 		}
 
-		if (retString == "0" && blackSide.getPieceAtLocationX(destination)->getName() == "P" && blackSide.isLegitEatingMoveForPawn(source, destination) && !flagForPawn)
+		if (retString == "0" && blackSide.getPieceAtLocationX(destination)->getName() == "p" && blackSide.isLegitEatingMoveForPawn(source, destination) && !flagForPawn)
 		{
 			if (blackSide.isOneOfMyPiecesAtXLocation(destination))
 			{
@@ -431,24 +449,24 @@ Piece* Board::createPiece(const string name, const string type, const string pos
 	}
 	if (type == "Queen")
 	{
-		Queen* newRook = new Queen(name, type, position);
-		return newRook;
+		Queen* newQueen = new Queen(name, type, position);
+		return newQueen;
 	}
 	if (type == "Bishop")
 	{
-		Bishop* newRook = new Bishop(name, type, position);
-		return newRook;
+		Bishop* newBishop = new Bishop(name, type, position);
+		return newBishop;
 	}
 	if (type == "Pawn")
 	{
-		Pawn* newRook = new Pawn(name, type, position);
-		return newRook;
+		Pawn* newPawn = new Pawn(name, type, position);
+		return newPawn;
 	}
 
 	if (type == "Knight")
 	{
-		Rook* newRook = new Rook(name, type, position);
-		return newRook;
+		Knight* newKnight = new Knight(name, type, position);
+		return newKnight;
 	}
 }
 
