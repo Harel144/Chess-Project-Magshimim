@@ -1,9 +1,19 @@
 #include "King.h"
 
+/*
+constructor of King.
+input: name, type and position of Piece.
+output: none.
+*/
 King::King(const string name, const string type, const string position) : Piece(name, type, position)
 {
 }
 
+/*
+this function moves the King and returns if the function moved the King or not (return is by values that the frontend understands).
+input: new position for King.
+output: code that the frondend understand.
+*/
 string King::move(const string newPosition)
 {
 	string returnString = to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
@@ -17,6 +27,11 @@ string King::move(const string newPosition)
 	return returnString;
 }
 
+/*
+this function returns if the King can reach given position
+input: position to check.
+output: true or false
+*/
 bool King::isLegitMove(const string position)
 {
 	string currPosition = getPosition();

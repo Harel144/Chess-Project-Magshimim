@@ -1,9 +1,19 @@
 #include "Bishop.h"
 
+/*
+constructor of Bishop.
+input: name, type and position of Piece.
+output: none.
+*/
 Bishop::Bishop(const string name, const string type, const string position) : Piece(name, type, position)
 {
 }
 
+/*
+this function moves the Bishop and returns if the function moved the Bishop or not (return is by values that the frontend understands)
+input: new position for Bishop
+output: code that the frondend understand.
+*/
 string Bishop::move(const string newPosition)
 {
 	string returnString = to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
