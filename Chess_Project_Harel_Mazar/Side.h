@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Bishop.h"
 #include "Rook.h"
 #include "King.h"
