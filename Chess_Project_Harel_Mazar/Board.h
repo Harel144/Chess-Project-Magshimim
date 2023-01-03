@@ -13,10 +13,6 @@ public:
 	bool isWhiteTurn() const;
 	bool isBlackTurn() const;
 	string getBoardString() const;
-	void setWhiteSide(Side& newWhiteSide);
-	void setBlackSide(Side& newBlackSide);
-	Side getBlackSide() const;
-	Side getWhiteSide() const;
 	void setBoardString(const string newBoard);
 
 	//other methods

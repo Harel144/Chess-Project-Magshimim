@@ -206,62 +206,57 @@ void Board::eatPiece(const string position)
 	}
 }
 
+/*
+this function returns if a square is taken by piece of any side.
+input: square location to check if a piece is there.
+output: true or false.
+*/
 bool Board::isSquareTaken(const string position)
 {
 	return blackSide.isOneOfMyPiecesAtXLocation(position) || whiteSide.isOneOfMyPiecesAtXLocation(position);
 }
 
-Side Board::getBlackSide() const
-{
-	return this->blackSide;
-}
-
-Side Board::getWhiteSide() const
-{
-	return this->whiteSide;
-}
-
-void Board::setWhiteSide(Side& newWhiteSide)
-{
-	this->whiteSide = newWhiteSide;
-}
-
-void Board::setBlackSide(Side& newBlackSide)
-{
-	this->blackSide = newBlackSide;
-}
-
+/*
+this function moves a piece from source to destination and returns a code to communicate with the frontend.
+input: source and destination (strings).
+output: code to communicate with the frontend.
+*/
 string Board::movePieceAtBoard(const string source, const string destination)
 {
 	string retString;
 
 	if (isWhiteTurn())
 	{
-		if (blackSide.isOneOfMyPiecesAtXLocation(source))
+		if (blackSide.isOneOfMyPiecesAtXLocation(source))	//if it's not white piece.
 		{
 			return to_string(ILLEGALMOVENOORIGINALPIECE);
 		}
 
-		if (!whiteSide.isOneOfMyPiecesAtXLocation(source))
+		if (!whiteSide.isOneOfMyPiecesAtXLocation(source))	//if it's empty.
 		{
 			return to_string(ILLEGALMOVENOORIGINALPIECE);
 		}
 
-		if (whiteSide.getPieceAtLocationX(source)->getType() != "Knight" && (!isOneOfWhitePiecesCanReachLocationX(source, destination)))
+		//if any piece blocking the other piece from reaching to destination (for example: rook e1e5 and there is a pawn at e4).
+		//knight isn't affected by this because he's jumping.
+		if (whiteSide.getPieceAtLocationX(source)->getType() != "Knight" && (!isOneOfWhitePiecesCanReachLocationX(source, destination))) 
 		{
 			return to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
 		}
 
 		if (whiteSide.getPieceAtLocationX(source)->getName() == "P")
 		{
+			//if any piece of black taking the abillity from white pawn to move twice at first move.
 			if (whiteSide.getPieceAtLocationX(source)->isItFirstMove() && blackSide.isOneOfMyPiecesAtXLocation(destination))
 			{
 				return to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
 			}
 		}
+
 		bool flagForPawn = whiteSide.getPieceAtLocationX(source)->isLegitMove(destination);
-		retString = whiteSide.movePiece(source, destination);
+		retString = whiteSide.movePiece(source, destination);	//moves the piece
 		
+		//if a black's piece suppose to get eaten (check for pawn is later on because pawn movement while eating is differant from normal move)
 		if (blackSide.isOneOfMyPiecesAtXLocation(destination) && retString == "0" && whiteSide.getPieceAtLocationX(destination)->getName() != "P")
 		{
 			//if the eating isn't preventing check i will remake the piece.
@@ -273,9 +268,9 @@ string Board::movePieceAtBoard(const string source, const string destination)
 
 			eatPiece(destination);
 
-			if (isKingChecked())
+			if (isKingChecked())	//if king is checked because the thing got eaten
 			{
-				whiteSide.movePiece(destination, source);
+				whiteSide.movePiece(destination, source);	//returns the piece back.
 				//adding the piece back
 				blackSide.addPiece(createPiece(name, type, position));
 				retString = to_string(ILLEGALMOVESELFCHECK);
@@ -284,13 +279,14 @@ string Board::movePieceAtBoard(const string source, const string destination)
 
 		}
 
-		if (isKingChecked())
+		if (isKingChecked())	//if king is checked because of the movement / before.
 		{
-			whiteSide.movePiece(destination, source);
+			whiteSide.movePiece(destination, source);	//returns piece back.
 			retString = to_string(ILLEGALMOVESELFCHECK);
 			return retString;
 		}
-
+		
+		//check eating for pawn.
 		if (retString == "0" && whiteSide.getPieceAtLocationX(destination)->getName() == "P" && whiteSide.isLegitEatingMoveForPawn(source, destination) && !flagForPawn)
 		{
 			if (blackSide.isOneOfMyPiecesAtXLocation(destination))
@@ -324,6 +320,8 @@ string Board::movePieceAtBoard(const string source, const string destination)
 	}
 	else
 	{
+		//black side's moving code. same as white.
+
 		if (whiteSide.isOneOfMyPiecesAtXLocation(source))
 		{
 			return to_string(ILLEGALMOVENOORIGINALPIECE);
@@ -394,9 +392,9 @@ string Board::movePieceAtBoard(const string source, const string destination)
 		}
 	}
 
-	if (retString == "0" || retString == "1" || retString == "8")
+	if (retString == "0" || retString == "1" || retString == "8")	//if move was legit.
 	{
-		changeTurn();
+		changeTurn();	//changes turn
 	}
 
 	return retString;
@@ -430,17 +428,32 @@ void Board::updateBoardString()
 	setBoardString(newBoardStr);
 }
 
+/*
+this function sets the board string.
+input: new board's string.
+output: none.
+*/
 void Board::setBoardString(const string newBoard)
 {
 	this->board = newBoard;
 }
 
+/*
+this function changes turns.
+input: none.
+output: none.
+*/
 void Board::changeTurn()
 {
 	this->blackSide.changeTurnState();
 	this->whiteSide.changeTurnState();
 }
 
+/*
+this function returns if the king is checked or not.
+input: none.
+output: true or false.
+*/
 bool Board::isKingChecked()
 {
 	if (isWhiteTurn())
@@ -471,6 +484,12 @@ bool Board::isKingChecked()
 	return false;
 }
 
+/*
+this function creates a piece.
+input: name of piece, type of piece and position of piece
+output: piece with given parameters.
+*/
+//note: i haven't used it at the constructor because this one got created pretty much near the end.
 Piece* Board::createPiece(const string name, const string type, const string position)
 {
 	if (type == "Rook")
@@ -501,32 +520,47 @@ Piece* Board::createPiece(const string name, const string type, const string pos
 	}
 }
 
+/*
+this function returns if a black piece can reach given location from given location.
+input: source position and destination position to check on.
+output: true or false.
+*/
 bool Board::isOneOfBlackPiecesCanReachLocationX(const string srcPosition, const string destPosition) const
 {
 	return this->blackSide.isOneOfMyPiecesCanReachXLocation(destPosition) && !isThereAnInterrupterPieceAtPath(srcPosition,destPosition);
 }
 
+/*
+this function returns if a white piece can reach given location from given location.
+input: source position and destination position to check on.
+output: true or false.
+*/
 bool Board::isOneOfWhitePiecesCanReachLocationX(const string srcPosition, const string destPosition) const
 {
 	return this->whiteSide.isOneOfMyPiecesCanReachXLocation(destPosition) && !isThereAnInterrupterPieceAtPath(srcPosition, destPosition);
 }
 
+/*
+this function returns if there is a piece between 2 given locations.
+input: source position and destination position to check on.
+output: true or false.
+*/
 bool Board::isThereAnInterrupterPieceAtPath(string srcPosition, string destPosition) const
 {
 	int srcValue = srcPosition[0] + srcPosition[1];
 	int dstValue = destPosition[0] + destPosition[1];
 
-	if (destPosition > srcPosition)
+	if (destPosition > srcPosition)		//going forward or backward.
 	{
-		if (srcPosition[0] == destPosition[0])
+		if (srcPosition[0] == destPosition[0])	//if the move is a horizontal one 
 		{
 			while (destPosition[1] > srcPosition[1])
 			{
-				destPosition[1] = destPosition[1] - 1;
+				destPosition[1] = destPosition[1] - 1;	//this runs first so the function won't check the destination (because it possible to have a piece there to eat)
 
-				if (destPosition != srcPosition)
+				if (destPosition != srcPosition)	//if not source.
 				{
-					if (whiteSide.isOneOfMyPiecesAtXLocation(destPosition) || blackSide.isOneOfMyPiecesAtXLocation(destPosition))
+					if (whiteSide.isOneOfMyPiecesAtXLocation(destPosition) || blackSide.isOneOfMyPiecesAtXLocation(destPosition))	//checks if a piece is between.
 					{
 						return true;
 					}
@@ -534,7 +568,7 @@ bool Board::isThereAnInterrupterPieceAtPath(string srcPosition, string destPosit
 			}
 		}
 
-		if (srcPosition[1] == destPosition[1])
+		if (srcPosition[1] == destPosition[1])	//if the move is vertical one.
 		{
 			while (destPosition[0] > srcPosition[0])
 			{
@@ -550,7 +584,7 @@ bool Board::isThereAnInterrupterPieceAtPath(string srcPosition, string destPosit
 			}
 		}
 
-		if (srcPosition[0] != destPosition[0] && srcPosition[1] != destPosition[1])
+		if (srcPosition[0] != destPosition[0] && srcPosition[1] != destPosition[1])	//if the move is a diagonal one.
 		{
 			while (destPosition[0] > srcPosition[0] && destPosition[1] > srcPosition[1])
 			{
@@ -567,7 +601,7 @@ bool Board::isThereAnInterrupterPieceAtPath(string srcPosition, string destPosit
 			}
 		}
 	}
-	else
+	else     //if the move is forward
 	{
 		if (srcPosition[0] == destPosition[0])
 		{
