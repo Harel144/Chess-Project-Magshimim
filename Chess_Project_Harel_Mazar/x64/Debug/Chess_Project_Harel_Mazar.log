@@ -1,3 +1,1 @@
-﻿  Board.cpp
-C:\Users\test0\source\repos\Ex7_And_8_Harel_Mazar\Chess_Project_Harel_Mazar\Board.cpp(453): warning C4715: 'Board::createPiece': not all control paths return a value
-  Chess_Project_Harel_Mazar.vcxproj -> C:\Users\test0\source\repos\Ex7_And_8_Harel_Mazar\Chess_Project_Harel_Mazar\x64\Debug\Chess_Project_Harel_Mazar.exe
+﻿  Chess_Project_Harel_Mazar.vcxproj -> C:\Users\test0\source\repos\Ex7_And_8_Harel_Mazar\Chess_Project_Harel_Mazar\x64\Debug\Chess_Project_Harel_Mazar.exe
