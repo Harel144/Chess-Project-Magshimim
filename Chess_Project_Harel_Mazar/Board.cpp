@@ -78,15 +78,7 @@ Board::Board()
 
 	//black pawns
 	Pawn* blackPawnOne = new Pawn("p", "Pawn", "a7");
-	/*
-	Pawn* blackPawnTwo = new Pawn("p", "Pawn", "b7");
-	Pawn* blackPawnThree = new Pawn("p", "Pawn", "c7");
-	Pawn* blackPawnFour = new Pawn("p", "Pawn", "d7");
-	Pawn* blackPawnFive = new Pawn("p", "Pawn", "e7");
-	Pawn* blackPawnSix = new Pawn("p", "Pawn", "f7");
-	Pawn* blackPawnSeven = new Pawn("p", "Pawn", "g7");
-	Pawn* blackPawnEignt = new Pawn("p", "Pawn", "h7");
-	*/
+
 	//white pawns
 	Pawn* whitePawnOne = new Pawn("P", "Pawn", "b2");
 
@@ -250,7 +242,7 @@ string Board::movePieceAtBoard(const string source, const string destination)
 			return retString;
 		}
 
-		if (retString == "0" && whiteSide.getPieceAtLocationX(destination)->getName() == "P" && whiteSide.isLegitEatingMoveForPawn(source, destination, "P") && !flagForPawn)
+		if (retString == "0" && whiteSide.getPieceAtLocationX(destination)->getName() == "P" && whiteSide.isLegitEatingMoveForPawn(source, destination) && !flagForPawn)
 		{
 			if (blackSide.isOneOfMyPiecesAtXLocation(destination))
 			{
@@ -321,7 +313,7 @@ string Board::movePieceAtBoard(const string source, const string destination)
 			return retString;
 		}
 
-		if (retString == "0" && blackSide.getPieceAtLocationX(destination)->getName() == "p" && blackSide.isLegitEatingMoveForPawn(source, destination, "p") && !flagForPawn)
+		if (retString == "0" && blackSide.getPieceAtLocationX(destination)->getName() == "P" && blackSide.isLegitEatingMoveForPawn(source, destination) && !flagForPawn)
 		{
 			if (blackSide.isOneOfMyPiecesAtXLocation(destination))
 			{
@@ -460,15 +452,14 @@ Piece* Board::createPiece(const string name, const string type, const string pos
 	}
 }
 
-bool Board::isOneOfBlackPiecesCanReachLocationX(const string srcPosition, const string destPosition)
+bool Board::isOneOfBlackPiecesCanReachLocationX(const string srcPosition, const string destPosition) const
 {
 	return this->blackSide.isOneOfMyPiecesCanReachXLocation(destPosition) && !isThereAnInterrupterPieceAtPath(srcPosition,destPosition);
 }
 
-bool Board::isOneOfWhitePiecesCanReachLocationX(string srcPosition, string destPosition)
+bool Board::isOneOfWhitePiecesCanReachLocationX(const string srcPosition, const string destPosition) const
 {
-	bool c = this->whiteSide.isOneOfMyPiecesCanReachXLocation(destPosition) && !isThereAnInterrupterPieceAtPath(srcPosition, destPosition);
-	return c;
+	return this->whiteSide.isOneOfMyPiecesCanReachXLocation(destPosition) && !isThereAnInterrupterPieceAtPath(srcPosition, destPosition);
 }
 
 bool Board::isThereAnInterrupterPieceAtPath(string srcPosition, string destPosition) const

@@ -26,11 +26,11 @@ public:
 	Side operator=(Side& otherSide);
 
 	bool isOneOfMyPiecesAtXLocation(const string location) const;
-	bool isOneOfMyPiecesCanReachXLocation(string location);
-	Piece* getPieceAtLocationX(string location) const;
+	bool isOneOfMyPiecesCanReachXLocation(const string location) const;
+	Piece* getPieceAtLocationX(const string location) const;
 	string getKingLocation() const;
 	void setCheckState(const bool check);
-	bool isLegitEatingMoveForPawn(string source, string destination, string name);
+	bool isLegitEatingMoveForPawn(const string source, const string destination);
 
 private:
 	vector<Piece*> Pieces;

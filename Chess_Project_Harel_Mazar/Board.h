@@ -27,8 +27,8 @@ public:
 	void updateBoardString();
 	Piece* createPiece(const string name, const string type, const string position);
 	bool isKingChecked();
-	bool isOneOfBlackPiecesCanReachLocationX(string srcPosition, string destPosition);
-	bool isOneOfWhitePiecesCanReachLocationX(string srcPosition, string destPosition);
+	bool isOneOfBlackPiecesCanReachLocationX(const string srcPosition, const string destPosition) const;
+	bool isOneOfWhitePiecesCanReachLocationX(const string srcPosition, const string destPosition) const;
 	bool isThereAnInterrupterPieceAtPath(string srcPosition, string destPosition) const;
 
 private:
