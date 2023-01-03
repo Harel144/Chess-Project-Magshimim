@@ -96,12 +96,43 @@ Board::Board()
 
 	//black pawns
 	Pawn* blackPawnOne = new Pawn("p", "Pawn", "a7");
+	Pawn* blackPawnTwo = new Pawn("p", "Pawn", "b7");
+	Pawn* blackPawnThree = new Pawn("p", "Pawn", "c7");
+	Pawn* blackPawnFour = new Pawn("p", "Pawn", "d7");
+	Pawn* blackPawnFive = new Pawn("p", "Pawn", "e7");
+	Pawn* blackPawnSix = new Pawn("p", "Pawn", "f7");
+	Pawn* blackPawnSeven = new Pawn("p", "Pawn", "g7");
+	Pawn* blackPawnEight = new Pawn("p", "Pawn", "h7");
 
 	//white pawns
-	Pawn* whitePawnOne = new Pawn("P", "Pawn", "b2");
+	Pawn* whitePawnOne = new Pawn("P", "Pawn", "a2");
+	Pawn* whitePawnTwo = new Pawn("P", "Pawn", "b2");
+	Pawn* whitePawnThree = new Pawn("P", "Pawn", "c2");
+	Pawn* whitePawnFour = new Pawn("P", "Pawn", "d2");
+	Pawn* whitePawnFive = new Pawn("P", "Pawn", "e2");
+	Pawn* whitePawnSix = new Pawn("P", "Pawn", "f2");
+	Pawn* whitePawnSeven = new Pawn("P", "Pawn", "g2");
+	Pawn* whitePawnEight = new Pawn("P", "Pawn", "h2");
 
 	this->blackSide.addPiece(blackPawnOne);
+	this->blackSide.addPiece(blackPawnTwo);
+	this->blackSide.addPiece(blackPawnThree);
+	this->blackSide.addPiece(blackPawnFour);
+	this->blackSide.addPiece(blackPawnFive);
+	this->blackSide.addPiece(blackPawnSix);
+	this->blackSide.addPiece(blackPawnSeven);
+	this->blackSide.addPiece(blackPawnEight);
+
 	this->whiteSide.addPiece(whitePawnOne);
+	this->whiteSide.addPiece(whitePawnTwo);
+	this->whiteSide.addPiece(whitePawnThree);
+	this->whiteSide.addPiece(whitePawnFour);
+	this->whiteSide.addPiece(whitePawnFive);
+	this->whiteSide.addPiece(whitePawnSix);
+	this->whiteSide.addPiece(whitePawnSeven);
+	this->whiteSide.addPiece(whitePawnEight);
+
+
 }
 
 /*
