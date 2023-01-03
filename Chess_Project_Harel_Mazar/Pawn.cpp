@@ -1,10 +1,20 @@
 #include "Pawn.h"
 
+/*
+constructor of Pawn.
+input: name, type and position of Piece.
+output: none.
+*/
 Pawn::Pawn(const string name, const string type, const string position) : Piece(name, type, position)
 {
 	changePawnMove(true);
 }
 
+/*
+this function moves the Pawn and returns if the function moved the Pawn or not (return is by values that the frontend understands)
+input: new position for Pawn
+output: code that the frondend understand.
+*/
 string Pawn::move(const string newPosition)
 {
 	string returnString = to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
@@ -21,6 +31,11 @@ string Pawn::move(const string newPosition)
 	return returnString;
 }
 
+/*
+this function returns if the Pawn can reach given position
+input: position to check.
+output: true or false
+*/
 bool Pawn::isLegitMove(const string position)
 {
 	string currPosition = getPosition();
@@ -55,6 +70,11 @@ bool Pawn::isLegitMove(const string position)
 	return straightOnce;
 }
 
+/*
+this function returns if the Pawn can reach given position while eating.
+input: position to check.
+output: true or false
+*/
 bool Pawn::isLegitEatingMove(const string position)
 {
 	string currPosition = getPosition();

@@ -47,10 +47,6 @@ void main()
 	// msgToGraphics should contain the board string accord the protocol
 	// YOUR CODE
 	Board gameBoard = *(new Board());
-	
-	Side blackSide = gameBoard.getBlackSide();
-	Side whiteSide = gameBoard.getWhiteSide();
-
 	string currBoard = gameBoard.getBoardString();
 
 	strcpy_s(msgToGraphics, currBoard.c_str()); // just example...

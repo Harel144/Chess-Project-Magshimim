@@ -15,22 +15,25 @@ class Side
 {
 
 public:
+	//c'tor
 	Side();
 	void addPiece(Piece* newPiece);
 	void removePiece(const string position);
 
+	//getters and setters
 	vector<Piece*> getPiecesVector() const;
-
-	void changeTurnState();
+	Piece* getPieceAtLocationX(const string location) const;
+	string getKingLocation() const;
 	bool isItSideTurn() const;
+
+	//methods
+	void changeTurnState();
 
 	string movePiece(const string sourcePosOfPiece, const string destinationPosOfPiece);
 	Side operator=(Side& otherSide);
 
 	bool isOneOfMyPiecesAtXLocation(const string location) const;
 	bool isOneOfMyPiecesCanReachXLocation(const string location) const;
-	Piece* getPieceAtLocationX(const string location) const;
-	string getKingLocation() const;
 	void setCheckState(const bool check);
 	bool isLegitEatingMoveForPawn(const string source, const string destination);
 
