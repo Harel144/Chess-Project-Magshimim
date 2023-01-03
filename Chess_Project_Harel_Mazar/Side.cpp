@@ -60,7 +60,7 @@ Side Side::operator=(Side& otherSide)
 }
 
 //note: function is called only when there is a piece at the given location 100%
-Piece* Side::getPieceAtLocationX(string location) const
+Piece* Side::getPieceAtLocationX(const string location) const
 {
 	for (int i = 0; i < this->Pieces.size(); i++)
 	{
@@ -89,43 +89,16 @@ string Side::movePiece(const string sourcePosOfPiece, const string destinationPo
 	return returnString;
 }
 
-bool Side::isLegitEatingMoveForPawn(string source, string destination, string name)
-{
-	bool diagonalOnce = false;
-	//black can eat 1 diagonal forward which is backward for white
-	if (name == "P")
-	{
-		diagonalOnce = source[1] - destination[1] == -1 && std::abs(source[0] - destination[0]) == 1;
-	}
-	else
-	{
-		diagonalOnce = source[1] - destination[1] == -1 && std::abs(source[0] - destination[0]) == 1;
-	}
-
-	return diagonalOnce;
-}
-
-bool Side::isOneOfMyPiecesCanReachXLocation( string location)
+bool Side::isOneOfMyPiecesCanReachXLocation(const string location) const
 {
 	for (int i = 0; i < this->Pieces.size(); i++)
 	{
 		string oldPos = this->Pieces[i]->getPosition();
 
-		if (this->Pieces[i]->move(location) == "0" && this->Pieces[i]->getType() != "Pawn")
+		if (this->Pieces[i]->move(location) == "0")
 		{
 			this->Pieces[i]->move(oldPos);
 			return true;
-		}
-
-		if (this->Pieces[i]->getType() == "Pawn")
-		{
-			if (isLegitEatingMoveForPawn(oldPos, location, this->Pieces[i]->getName()) || this->Pieces[i]->move(location) == "0")
-			{
-				//forcing pawn back
-				this->Pieces[i]->setPosition(oldPos);
-				return true;
-			}
-			this->Pieces[i]->setPosition(oldPos);
 		}
 		this->Pieces[i]->move(oldPos);
 	}
@@ -146,4 +119,22 @@ string Side::getKingLocation() const
 void Side::setCheckState(const bool check)
 {
 	this->isChecked = check;
+}
+
+bool Side::isLegitEatingMoveForPawn(const string source,const string destination)
+{
+	bool diagonalOnce = false;
+	Piece* pawnPiece = getPieceAtLocationX(destination);	//when function runs, the destination supposed to be the place of the pawn.
+
+	//black can eat 1 diagonal forward which is backward for white
+	if (pawnPiece->getName() == "P")
+	{
+		diagonalOnce = source[1] - destination[1] == -1 && std::abs(source[0] - destination[0]) == 1;
+	}
+	else
+	{
+		diagonalOnce = source[1] - destination[1] == -1 && std::abs(source[0] - destination[0]) == 1;
+	}
+
+	return diagonalOnce;
 }
