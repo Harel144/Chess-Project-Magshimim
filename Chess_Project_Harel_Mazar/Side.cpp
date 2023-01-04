@@ -184,22 +184,21 @@ void Side::setCheckState(const bool check)
 
 /*
 this function checks if a pawn can eat from source to destination.
-input: dource and destination locations to check
+input: dource and destination locations to check and name of piece
 output: true or false.
 */
-bool Side::isLegitEatingMoveForPawn(const string source,const string destination)
+bool Side::isLegitEatingMoveForPawn(const string source,const string destination, const string name)
 {
 	bool diagonalOnce = false;
-	Piece* pawnPiece = getPieceAtLocationX(destination);	//when function runs, the destination supposed to be the place of the pawn.
 
 	//black can eat 1 diagonal forward which is backward for white
-	if (pawnPiece->getName() == "P")
+	if (name == "P")
 	{
 		diagonalOnce = source[1] - destination[1] == -1 && std::abs(source[0] - destination[0]) == 1;
 	}
 	else
 	{
-		diagonalOnce = source[1] - destination[1] == -1 && std::abs(source[0] - destination[0]) == 1;
+		diagonalOnce = source[1] - destination[1] == 1 && std::abs(source[0] - destination[0]) == 1;
 	}
 
 	return diagonalOnce;

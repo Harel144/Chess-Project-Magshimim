@@ -56,7 +56,7 @@ bool Pawn::isLegitMove(const string position)
 	}
 	else
 	{
-		if (this->getName() == "p")
+		if (this->getName() == "P")
 		{
 			straightOnce = currPosition[1] - position[1] == -1 && (currPosition[0] - position[0] == 0);
 		}
@@ -88,14 +88,9 @@ bool Pawn::isLegitEatingMove(const string position)
 	}
 	else
 	{
-		diagonalOnce = currPosition[1] - position[1] == -1 && std::abs(currPosition[0] - position[0]) == 1;
+		diagonalOnce = currPosition[1] - position[1] == 1 && std::abs(currPosition[0] - position[0]) == 1;
 	}
 
-	if (diagonalOnce)
-	{
-		return true;
-	}
-
-	return false;
+	return diagonalOnce;
 }
 

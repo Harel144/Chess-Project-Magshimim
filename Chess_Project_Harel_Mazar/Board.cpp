@@ -227,37 +227,33 @@ string Board::movePieceAtBoard(const string source, const string destination)
 
 	if (isWhiteTurn())
 	{
-		if (blackSide.isOneOfMyPiecesAtXLocation(source))	//if it's not white piece.
+		if (blackSide.isOneOfMyPiecesAtXLocation(source))
 		{
 			return to_string(ILLEGALMOVENOORIGINALPIECE);
 		}
 
-		if (!whiteSide.isOneOfMyPiecesAtXLocation(source))	//if it's empty.
+		if (!whiteSide.isOneOfMyPiecesAtXLocation(source))
 		{
 			return to_string(ILLEGALMOVENOORIGINALPIECE);
 		}
 
-		//if any piece blocking the other piece from reaching to destination (for example: rook e1e5 and there is a pawn at e4).
-		//knight isn't affected by this because he's jumping.
-		if (whiteSide.getPieceAtLocationX(source)->getType() != "Knight" && (!isOneOfWhitePiecesCanReachLocationX(source, destination))) 
+		if (!isOneOfBlackPiecesCanReachLocationX(source, destination) && whiteSide.getPieceAtLocationX(source)->getType() != "Knight")
 		{
 			return to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
 		}
 
 		if (whiteSide.getPieceAtLocationX(source)->getName() == "P")
 		{
-			//if any piece of black taking the abillity from white pawn to move twice at first move.
-			if (whiteSide.getPieceAtLocationX(source)->isItFirstMove() && blackSide.isOneOfMyPiecesAtXLocation(destination))
+			if (whiteSide.getPieceAtLocationX(source)->isItFirstMove() && blackSide.isOneOfMyPiecesAtXLocation(destination) && !whiteSide.isLegitEatingMoveForPawn(source, destination, "P"))
 			{
 				return to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
 			}
 		}
-
 		bool flagForPawn = whiteSide.getPieceAtLocationX(source)->isLegitMove(destination);
-		retString = whiteSide.movePiece(source, destination);	//moves the piece
-		
-		//if a black's piece suppose to get eaten (check for pawn is later on because pawn movement while eating is differant from normal move)
-		if (blackSide.isOneOfMyPiecesAtXLocation(destination) && retString == "0" && whiteSide.getPieceAtLocationX(destination)->getName() != "P")
+		retString = whiteSide.movePiece(source, destination);
+
+
+		if (blackSide.isOneOfMyPiecesAtXLocation(destination) && retString == "0" && whiteSide.getPieceAtLocationX(destination)->getName() != "p")
 		{
 			//if the eating isn't preventing check i will remake the piece.
 			Piece* tempPiece = blackSide.getPieceAtLocationX(destination);
@@ -268,54 +264,22 @@ string Board::movePieceAtBoard(const string source, const string destination)
 
 			eatPiece(destination);
 
-			if (isKingChecked())	//if king is checked because the thing got eaten
+			if (isKingChecked())
 			{
-				whiteSide.movePiece(destination, source);	//returns the piece back.
+				//forcing pawn back
+				whiteSide.getPieceAtLocationX(destination)->setPosition(source);
 				//adding the piece back
 				blackSide.addPiece(createPiece(name, type, position));
 				retString = to_string(ILLEGALMOVESELFCHECK);
 				return retString;
 			}
-
 		}
 
-		if (isKingChecked())	//if king is checked because of the movement / before.
+		if (isKingChecked() && retString == "0")
 		{
-			whiteSide.movePiece(destination, source);	//returns piece back.
+			whiteSide.movePiece(destination, source);
 			retString = to_string(ILLEGALMOVESELFCHECK);
 			return retString;
-		}
-		
-		//check eating for pawn.
-		if (retString == "0" && whiteSide.getPieceAtLocationX(destination)->getName() == "P" && whiteSide.isLegitEatingMoveForPawn(source, destination) && !flagForPawn)
-		{
-			if (blackSide.isOneOfMyPiecesAtXLocation(destination))
-			{
-				//if the eating isn't preventing check i will remake the piece.
-				Piece* tempPiece = blackSide.getPieceAtLocationX(destination);
-				string name, type, position;
-				name = tempPiece->getName();
-				type = tempPiece->getType();
-				position = tempPiece->getPosition();
-
-				eatPiece(destination);
-
-				if (isKingChecked())
-				{
-					//forcing pawn back
-					whiteSide.getPieceAtLocationX(destination)->setPosition(source);
-					//adding the piece back
-					blackSide.addPiece(createPiece(name, type, position));
-					retString = to_string(ILLEGALMOVESELFCHECK);
-					return retString;
-				}
-			}
-			else
-			{
-				//forcing pawn back
-				whiteSide.getPieceAtLocationX(destination)->setPosition(source);
-				retString = to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
-			}
 		}
 	}
 	else
@@ -339,7 +303,7 @@ string Board::movePieceAtBoard(const string source, const string destination)
 
 		if (blackSide.getPieceAtLocationX(source)->getName() == "p")
 		{
-			if (blackSide.getPieceAtLocationX(source)->isItFirstMove() && whiteSide.isOneOfMyPiecesAtXLocation(destination))
+			if (blackSide.getPieceAtLocationX(source)->isItFirstMove() && whiteSide.isOneOfMyPiecesAtXLocation(destination) && !blackSide.isLegitEatingMoveForPawn(source, destination, "p"))
 			{
 				return to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
 			}
@@ -350,7 +314,24 @@ string Board::movePieceAtBoard(const string source, const string destination)
 
 		if (whiteSide.isOneOfMyPiecesAtXLocation(destination) && retString == "0" && blackSide.getPieceAtLocationX(destination)->getName() != "P")
 		{
+			//if the eating isn't preventing check i will remake the piece.
+			Piece* tempPiece = whiteSide.getPieceAtLocationX(destination);
+			string name, type, position;
+			name = tempPiece->getName();
+			type = tempPiece->getType();
+			position = tempPiece->getPosition();
+
 			eatPiece(destination);
+
+			if (isKingChecked())
+			{
+				//forcing pawn back
+				blackSide.getPieceAtLocationX(destination)->setPosition(source);
+				//adding the piece back
+				whiteSide.addPiece(createPiece(name, type, position));
+				retString = to_string(ILLEGALMOVESELFCHECK);
+				return retString;
+			}
 		}
 
 		if (isKingChecked() && retString == "0")
@@ -360,36 +341,6 @@ string Board::movePieceAtBoard(const string source, const string destination)
 			return retString;
 		}
 
-		if (retString == "0" && blackSide.getPieceAtLocationX(destination)->getName() == "p" && blackSide.isLegitEatingMoveForPawn(source, destination) && !flagForPawn)
-		{
-			if (blackSide.isOneOfMyPiecesAtXLocation(destination))
-			{
-				//if the eating isn't preventing check i will remake the piece.
-				Piece* tempPiece = whiteSide.getPieceAtLocationX(destination);
-				string name, type, position;
-				name = tempPiece->getName();
-				type = tempPiece->getType();
-				position = tempPiece->getPosition();
-
-				eatPiece(destination);
-
-				if (isKingChecked())
-				{
-					//forcing pawn back
-					blackSide.getPieceAtLocationX(destination)->setPosition(source);
-					//adding the piece back
-					whiteSide.addPiece(createPiece(name, type, position));
-					retString = to_string(ILLEGALMOVESELFCHECK);
-					return retString;
-				}
-			}
-			else
-			{
-				//forcing pawn back
-				blackSide.getPieceAtLocationX(destination)->setPosition(source);
-				retString = to_string(ILLEGALMOVEILLEGALMOVEMENTOFPIECE);
-			}
-		}
 	}
 
 	if (retString == "0" || retString == "1" || retString == "8")	//if move was legit.

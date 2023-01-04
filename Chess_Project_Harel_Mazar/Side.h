@@ -35,7 +35,7 @@ public:
 	bool isOneOfMyPiecesAtXLocation(const string location) const;
 	bool isOneOfMyPiecesCanReachXLocation(const string location) const;
 	void setCheckState(const bool check);
-	bool isLegitEatingMoveForPawn(const string source, const string destination);
+	bool isLegitEatingMoveForPawn(const string source, const string destination, const string name);
 
 private:
 	vector<Piece*> Pieces;
